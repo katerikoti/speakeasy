@@ -210,6 +210,10 @@ For product-level decisions, ask before changing direction.
 
 Commits
 
+Speakeasy is its own git repository at coding/speakeasy, separate from the workspace repo that previously tracked all coding projects.
+
+All Speakeasy commits belong in this project's repository. Never commit unrelated workspace changes.
+
 Keep changes logically grouped.
 
 Prefer small, meaningful commits rather than one huge commit containing unrelated changes.
