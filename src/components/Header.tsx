@@ -34,11 +34,14 @@ export function Header({ streak = 0 }: { streak?: number }) {
     <header className="mx-auto flex w-full max-w-md items-center justify-between px-6 py-5">
       <div className="flex items-center gap-2">
         <div
-          className="flex items-center gap-2 rounded-full bg-linen px-4 py-2 text-sm font-medium shadow-sm"
+          className="flex items-center gap-1.5"
           aria-label={`${streak}-day streak`}
+          title={`${streak}-day streak`}
         >
-          <StreakIcon className="h-4 w-4 text-almond-silk" />
-          <span className="tabular-nums">{streak}</span>
+          <StreakIcon className="h-4 w-4 text-ink" />
+          <span className="text-base font-bold tabular-nums text-ink">
+            {streak}
+          </span>
         </div>
       </div>
       <div className="flex items-center gap-3">
@@ -67,7 +70,7 @@ export function Header({ streak = 0 }: { streak?: number }) {
         ) : (
           <Link
             href="/login"
-            className="rounded-full bg-linen px-4 py-2 text-sm font-medium text-ink shadow-sm transition-colors hover:bg-almond-cream"
+            className="rounded-full bg-ink px-5 py-2 text-sm font-semibold text-parchment shadow-sm transition-colors hover:bg-ink-soft"
           >
             Sign in
           </Link>
