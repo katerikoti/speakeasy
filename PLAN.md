@@ -19,14 +19,14 @@ Phase 0 — Project Foundation
 
 Phase 1 — Visual Foundation
 
-* Establish Speakeasy visual identity
-* Add warm neutral color palette
-* Establish typography
-* Create responsive page shell
-* Create header/navigation
-* Create initial home screen
-* Create topic wheel visual component
-* Ensure mobile-first layout
+* Establish Speakeasy visual identity — done
+* Add warm neutral color palette — done
+* Establish typography — done (Geist sans + Lora display)
+* Create responsive page shell — done
+* Create header/navigation — done (streak pill, calendar/settings buttons)
+* Create initial home screen — done
+* Create topic wheel visual component — done (10-segment palette wheel)
+* Ensure mobile-first layout — done
 
 Phase 2 — Topic System
 
