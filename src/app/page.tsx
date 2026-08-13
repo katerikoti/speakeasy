@@ -116,20 +116,22 @@ export default function Home() {
         {stage === "topic" && topic && !spinInProgress ? (
           <div className="flex flex-col items-center gap-5">
             <TopicCard topic={topic} />
-            <button
-              type="button"
-              onClick={session.beginPreparation}
-              className="rounded-full bg-ink px-8 py-3 font-medium text-parchment shadow-sm transition-colors hover:bg-ink-soft"
-            >
-              Start preparing
-            </button>
-            <button
-              type="button"
-              onClick={() => setWheelOpen(true)}
-              className="mt-2 text-sm font-medium text-ink-soft transition-colors hover:text-ink"
-            >
-              Spin again
-            </button>
+            <div className="flex flex-col items-center gap-4">
+              <button
+                type="button"
+                onClick={session.beginPreparation}
+                className="rounded-full bg-ink px-8 py-3 font-medium text-parchment shadow-sm transition-colors hover:bg-ink-soft"
+              >
+                Start preparing
+              </button>
+              <button
+                type="button"
+                onClick={() => setWheelOpen(true)}
+                className="text-sm font-medium text-ink-soft transition-colors hover:text-ink"
+              >
+                Spin again
+              </button>
+            </div>
           </div>
         ) : null}
       </main>
