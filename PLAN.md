@@ -33,7 +33,7 @@ Phase 2 — Topic System
 * Define topic data structure — done (src/lib/topics.ts)
 * Define categories — done (13 categories)
 * Define difficulty levels — done (easy/medium/challenge)
-* Create initial topic bank — done (130 topics)
+* Create initial topic bank — done (442 topics)
 * Implement random topic selection — done (src/lib/topicSelection.ts)
 * Implement unused-topic filtering — done
 * Implement topic pool reset when all topics are completed — done
@@ -68,13 +68,13 @@ Phase 4 — Guest Experience
 
 Phase 5 — Database
 
-* Set up PostgreSQL database — pending (Neon, needs DATABASE_URL)
-* Configure Prisma — done (Prisma 7, prisma.config.ts, Neon adapter)
+* Set up PostgreSQL database — done (Neon free tier, pooled DATABASE_URL)
+* Configure Prisma — done (Prisma 7, prisma.config.ts, Neon driver adapter)
 * Create Prisma schema — done (users/accounts/sessions/topics/practices/settings)
-* Create migrations — pending (needs DATABASE_URL)
-* Seed topic data — pending (seed script ready, prisma/seed.ts)
+* Create migrations — done (prisma/migrations/20260813113726_init)
+* Seed topic data — done (prisma/seed.ts, 442 topics)
 * Create database access layer — done (src/lib/db.ts, src/lib/db/practices.ts)
-* Test database connection — pending (needs DATABASE_URL)
+* Test database connection — done
 
 Phase 6 — Authentication
 

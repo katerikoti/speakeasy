@@ -142,6 +142,8 @@ The topic bank is a shared TypeScript module (src/lib/topics.ts).
 
 It is the single source of truth for topics, categories, and difficulty levels.
 
+The bank currently contains 442 topics across 13 categories and three difficulty levels (easy/medium/challenge).
+
 The module is bundled client-side so guest mode can select topics without a server connection, and the same module is reused when seeding the database.
 
 Topic selection should be handled by a dedicated piece of application logic (src/lib/topicSelection.ts) rather than being embedded directly inside the UI.
