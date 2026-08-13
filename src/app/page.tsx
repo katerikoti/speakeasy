@@ -126,7 +126,7 @@ export default function Home() {
             <button
               type="button"
               onClick={() => setWheelOpen(true)}
-              className="text-sm font-medium text-ink-soft transition-colors hover:text-ink"
+              className="mt-2 text-sm font-medium text-ink-soft transition-colors hover:text-ink"
             >
               Spin again
             </button>
