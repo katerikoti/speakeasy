@@ -4,28 +4,85 @@ import { useState } from "react";
 import { Header } from "@/components/Header";
 import { TopicCard } from "@/components/TopicCard";
 import { TopicWheel } from "@/components/TopicWheel";
-import { TOPICS, type Topic } from "@/lib/topics";
+import { CompletedStage } from "@/components/practice/CompletedStage";
+import { PreparationStage } from "@/components/practice/PreparationStage";
+import { ReflectionStage } from "@/components/practice/ReflectionStage";
+import { SpeakingStage } from "@/components/practice/SpeakingStage";
+import { usePracticeSession } from "@/components/practice/usePracticeSession";
+import { completedTopicIdsFrom, loadGuestData } from "@/lib/guestStorage";
+import { TOPICS } from "@/lib/topics";
 import { segmentIndexForTopic, selectTopic } from "@/lib/topicSelection";
 
 export default function Home() {
-  const [revealedTopic, setRevealedTopic] = useState<Topic | null>(null);
+  const session = usePracticeSession();
   const [spinInProgress, setSpinInProgress] = useState(false);
 
   function handleSpin(): number {
-    const topic = selectTopic(TOPICS, new Set<string>());
+    const topic = selectTopic(TOPICS, completedTopicIdsFrom(loadGuestData()));
     if (!topic) {
       return 0;
     }
-    setRevealedTopic(topic);
+    session.revealTopic(topic);
     setSpinInProgress(true);
     return segmentIndexForTopic(topic.id);
   }
 
-  function handleSpinEnd() {
-    setSpinInProgress(false);
+  const { stage, topic } = session;
+
+  if (stage === "preparing" && topic) {
+    return (
+      <div className="flex min-h-dvh flex-col">
+        <Header streak={0} />
+        <PreparationStage
+          topic={topic}
+          remainingSeconds={session.preparationRemaining ?? 0}
+          notes={session.notes}
+          onNotesChange={session.setNotes}
+          onStartSpeaking={session.startSpeaking}
+        />
+      </div>
+    );
   }
 
-  const showTopic = revealedTopic !== null && !spinInProgress;
+  if (stage === "speaking" && topic) {
+    return (
+      <div className="flex min-h-dvh flex-col">
+        <Header streak={0} />
+        <SpeakingStage
+          topic={topic}
+          remainingSeconds={session.speakingRemaining ?? 0}
+          notes={session.notes}
+          onFinishEarly={session.finishSpeaking}
+        />
+      </div>
+    );
+  }
+
+  if (stage === "reflection" && topic) {
+    return (
+      <div className="flex min-h-dvh flex-col">
+        <Header streak={0} />
+        <ReflectionStage
+          rating={session.rating}
+          onRate={session.setRating}
+          onComplete={session.complete}
+        />
+      </div>
+    );
+  }
+
+  if (stage === "completed" && topic) {
+    return (
+      <div className="flex min-h-dvh flex-col">
+        <Header streak={0} />
+        <CompletedStage
+          topic={topic}
+          rating={session.rating}
+          onPracticeAgain={session.reset}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-dvh flex-col">
@@ -34,8 +91,22 @@ export default function Home() {
         <h1 className="text-center font-display text-3xl font-medium text-ink">
           What will you talk about today?
         </h1>
-        <TopicWheel onSpin={handleSpin} onSpinEnd={handleSpinEnd} />
-        {showTopic && <TopicCard topic={revealedTopic} />}
+        <TopicWheel
+          onSpin={handleSpin}
+          onSpinEnd={() => setSpinInProgress(false)}
+        />
+        {stage === "topic" && topic && !spinInProgress ? (
+          <div className="flex flex-col items-center gap-6">
+            <TopicCard topic={topic} />
+            <button
+              type="button"
+              onClick={session.beginPreparation}
+              className="rounded-full bg-ink px-8 py-3 font-medium text-parchment shadow-sm transition-colors hover:bg-ink-soft"
+            >
+              Start preparing
+            </button>
+          </div>
+        ) : null}
       </main>
     </div>
   );

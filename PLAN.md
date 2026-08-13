@@ -43,17 +43,17 @@ The initial topic bank should contain a large number of high-quality topics rath
 
 Phase 3 — Core Practice Flow
 
-* Implement topic selection screen/state
-* Implement preparation stage
-* Implement preparation countdown
-* Implement optional notes
-* Allow starting speaking before preparation ends
-* Implement speaking timer
-* Allow early speaking completion
-* Implement reflection stage
-* Implement self-rating
-* Persist completed practice for guest users locally
-* Update local progress after completion
+* Implement topic selection screen/state — done
+* Implement preparation stage — done
+* Implement preparation countdown — done (wall-clock timestamp based)
+* Implement optional notes — done (client state only, not persisted)
+* Allow starting speaking before preparation ends — done
+* Implement speaking timer — done (wall-clock timestamp based)
+* Allow early speaking completion — done
+* Implement reflection stage — done
+* Implement self-rating — done (optional 1–5 scale)
+* Persist completed practice for guest users locally — done (src/lib/guestStorage.ts)
+* Update local progress after completion — done (completed topic feeds unused-topic filtering)
 
 Phase 4 — Guest Experience
 
