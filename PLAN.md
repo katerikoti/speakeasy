@@ -78,13 +78,13 @@ Phase 5 — Database
 
 Phase 6 — Authentication
 
-* Implement email registration
-* Implement secure password handling
-* Implement login
-* Implement logout
-* Implement authenticated session handling
-* Protect authenticated operations
-* Add Google authentication if practical without delaying core functionality
+* Implement email registration — done (POST /api/auth/register, server-validated)
+* Implement secure password handling — done (bcryptjs, 12 rounds)
+* Implement login — done (credentials provider, /login)
+* Implement logout — done (signOutAction)
+* Implement authenticated session handling — done (JWT strategy, /api/auth/[...nextauth])
+* Protect authenticated operations — done (requireUserId from session)
+* Add Google authentication if practical without delaying core functionality — deferred (needs Google OAuth credentials)
 
 Phase 7 — Guest-to-Account Migration
 

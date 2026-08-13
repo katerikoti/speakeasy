@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Lora } from "next/font/google";
+import { AuthProvider } from "@/components/AuthProvider";
+import { auth } from "@/auth";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,13 +19,16 @@ export const metadata: Metadata = {
   description: "Daily speaking practice, one spin at a time.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const session = await auth();
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${lora.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <AuthProvider session={session}>{children}</AuthProvider>
+      </body>
     </html>
   );
 }

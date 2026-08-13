@@ -48,17 +48,21 @@ The generated client is written to `src/generated/prisma` and is gitignored; it 
 
 4. Authentication
 
-Authentication uses Auth.js (NextAuth v5) with the Prisma adapter.
+Authentication uses Auth.js (NextAuth v5, `next-auth` 5.0.0-beta) with the Prisma adapter.
 
 The credentials provider provides email/password authentication.
 
-Passwords must be securely hashed using the hashing mechanism provided by the authentication stack.
+Sessions use the JWT strategy (required for credentials sign-in). The user id is written into the session via the `session` callback from the token `sub` claim, and `src/lib/session.ts` exposes `requireUserId()` for server-side route protection. Authenticated operations always derive the user id from the session, never from the client.
+
+Passwords are hashed with bcryptjs (12 rounds) before storage (`src/lib/passwords.ts`) and verified in the credentials `authorize` callback.
+
+Registration is handled by `POST /api/auth/register`, which validates input server-side, creates the user together with their default `UserSettings` in a transaction, and rejects duplicate emails.
 
 The application must never store plaintext passwords.
 
-Google OAuth may be added if it does not significantly complicate the initial implementation.
+Google OAuth may be added later if it does not significantly complicate the initial implementation. The Auth.js adapter models (Account, Session, VerificationToken) already exist in the schema to support it.
 
-Authentication should be isolated from practice logic so that guest mode can operate without authentication.
+Authentication is isolated from practice logic so that guest mode can operate without authentication.
 
 5. Guest Storage
 
