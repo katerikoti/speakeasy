@@ -26,6 +26,7 @@ Phase 1 — Visual Foundation
 * Create header/navigation — done (streak pill + sign in for guests, calendar/settings buttons for authenticated users only)
 * Create initial home screen — done
 * Create topic wheel visual component — done (30 alternating light/dark neutral slices for a multi-part look)
+* Reveal topic after spin — done (wheel is replaced by the topic card; a small "Spin again" button reopens the wheel)
 * Ensure mobile-first layout — done
 
 Phase 2 — Topic System

@@ -19,6 +19,7 @@ export default function Home() {
   const session = usePracticeSession();
   const guestData = useGuestData();
   const [spinInProgress, setSpinInProgress] = useState(false);
+  const [wheelOpen, setWheelOpen] = useState(true);
 
   const streak = currentStreak(
     guestData.practices.map((practice) => practice.practicedAt),
@@ -32,6 +33,11 @@ export default function Home() {
     session.revealTopic(topic);
     setSpinInProgress(true);
     return segmentIndexForTopic(topic.id);
+  }
+
+  function handlePracticeAgain() {
+    session.reset();
+    setWheelOpen(true);
   }
 
   const { stage, topic } = session;
@@ -85,7 +91,7 @@ export default function Home() {
         <CompletedStage
           topic={topic}
           rating={session.rating}
-          onPracticeAgain={session.reset}
+          onPracticeAgain={handlePracticeAgain}
         />
       </div>
     );
@@ -98,12 +104,17 @@ export default function Home() {
         <h1 className="text-center font-display text-3xl font-medium text-ink">
           What will you talk about today?
         </h1>
-        <TopicWheel
-          onSpin={handleSpin}
-          onSpinEnd={() => setSpinInProgress(false)}
-        />
+        {wheelOpen ? (
+          <TopicWheel
+            onSpin={handleSpin}
+            onSpinEnd={() => {
+              setSpinInProgress(false);
+              setWheelOpen(false);
+            }}
+          />
+        ) : null}
         {stage === "topic" && topic && !spinInProgress ? (
-          <div className="flex flex-col items-center gap-6">
+          <div className="flex flex-col items-center gap-5">
             <TopicCard topic={topic} />
             <button
               type="button"
@@ -111,6 +122,13 @@ export default function Home() {
               className="rounded-full bg-ink px-8 py-3 font-medium text-parchment shadow-sm transition-colors hover:bg-ink-soft"
             >
               Start preparing
+            </button>
+            <button
+              type="button"
+              onClick={() => setWheelOpen(true)}
+              className="text-sm font-medium text-ink-soft transition-colors hover:text-ink"
+            >
+              Spin again
             </button>
           </div>
         ) : null}
