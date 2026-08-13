@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { CalendarIcon, SettingsIcon, StreakIcon } from "./icons";
 
 function IconButton({
@@ -29,9 +30,13 @@ export function Header({ streak = 0 }: { streak?: number }) {
         <span className="tabular-nums">{streak}</span>
       </div>
       <div className="flex items-center gap-3">
-        <IconButton label="Open calendar">
+        <Link
+          href="/calendar"
+          aria-label="Open calendar"
+          className="flex h-11 w-11 items-center justify-center rounded-full bg-linen text-ink shadow-sm transition-colors hover:bg-almond-cream"
+        >
           <CalendarIcon className="h-5 w-5" />
-        </IconButton>
+        </Link>
         <IconButton label="Open settings">
           <SettingsIcon className="h-5 w-5" />
         </IconButton>

@@ -57,14 +57,14 @@ Phase 3 — Core Practice Flow
 
 Phase 4 — Guest Experience
 
-* Define guest storage format
-* Store completed topic IDs locally
-* Store practice dates locally
-* Store ratings locally
-* Calculate guest streak
-* Display guest streak
-* Display guest calendar
-* Handle local storage versioning if needed
+* Define guest storage format — done (versioned, src/lib/guestStorage.ts)
+* Store completed topic IDs locally — done (derived from practices)
+* Store practice dates locally — done
+* Store ratings locally — done
+* Calculate guest streak — done (src/lib/streak.ts, derived from dates)
+* Display guest streak — done (header pill)
+* Display guest calendar — done (/calendar)
+* Handle local storage versioning if needed — done (version: 1)
 
 Phase 5 — Database
 

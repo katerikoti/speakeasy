@@ -10,12 +10,19 @@ import { ReflectionStage } from "@/components/practice/ReflectionStage";
 import { SpeakingStage } from "@/components/practice/SpeakingStage";
 import { usePracticeSession } from "@/components/practice/usePracticeSession";
 import { completedTopicIdsFrom, loadGuestData } from "@/lib/guestStorage";
+import { currentStreak } from "@/lib/streak";
 import { TOPICS } from "@/lib/topics";
 import { segmentIndexForTopic, selectTopic } from "@/lib/topicSelection";
+import { useGuestData } from "@/lib/useGuestData";
 
 export default function Home() {
   const session = usePracticeSession();
+  const guestData = useGuestData();
   const [spinInProgress, setSpinInProgress] = useState(false);
+
+  const streak = currentStreak(
+    guestData.practices.map((practice) => practice.practicedAt),
+  );
 
   function handleSpin(): number {
     const topic = selectTopic(TOPICS, completedTopicIdsFrom(loadGuestData()));
@@ -32,7 +39,7 @@ export default function Home() {
   if (stage === "preparing" && topic) {
     return (
       <div className="flex min-h-dvh flex-col">
-        <Header streak={0} />
+        <Header streak={streak} />
         <PreparationStage
           topic={topic}
           remainingSeconds={session.preparationRemaining ?? 0}
@@ -47,7 +54,7 @@ export default function Home() {
   if (stage === "speaking" && topic) {
     return (
       <div className="flex min-h-dvh flex-col">
-        <Header streak={0} />
+        <Header streak={streak} />
         <SpeakingStage
           topic={topic}
           remainingSeconds={session.speakingRemaining ?? 0}
@@ -61,7 +68,7 @@ export default function Home() {
   if (stage === "reflection" && topic) {
     return (
       <div className="flex min-h-dvh flex-col">
-        <Header streak={0} />
+        <Header streak={streak} />
         <ReflectionStage
           rating={session.rating}
           onRate={session.setRating}
@@ -74,7 +81,7 @@ export default function Home() {
   if (stage === "completed" && topic) {
     return (
       <div className="flex min-h-dvh flex-col">
-        <Header streak={0} />
+        <Header streak={streak} />
         <CompletedStage
           topic={topic}
           rating={session.rating}
@@ -86,7 +93,7 @@ export default function Home() {
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <Header streak={0} />
+      <Header streak={streak} />
       <main className="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-center gap-10 px-6 pb-16">
         <h1 className="text-center font-display text-3xl font-medium text-ink">
           What will you talk about today?
