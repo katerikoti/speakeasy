@@ -1,7 +1,9 @@
 "use client";
 
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { Header } from "@/components/Header";
+import { SignUpPromptModal } from "@/components/practice/SignUpPromptModal";
 import { TopicCard } from "@/components/TopicCard";
 import { TopicWheel } from "@/components/TopicWheel";
 import { CompletedStage } from "@/components/practice/CompletedStage";
@@ -22,6 +24,8 @@ export function HomeClient({ settings }: { settings: PracticeSettings }) {
   const guestData = useGuestData();
   const [spinInProgress, setSpinInProgress] = useState(false);
   const [wheelOpen, setWheelOpen] = useState(true);
+  const [signUpPromptDismissed, setSignUpPromptDismissed] = useState(false);
+  const { status } = useSession();
 
   const streak = currentStreak(
     guestData.practices.map((practice) => practice.practicedAt),
@@ -46,6 +50,11 @@ export function HomeClient({ settings }: { settings: PracticeSettings }) {
   }
 
   const { stage, topic } = session;
+
+  const showSignUpPrompt =
+    status !== "authenticated" &&
+    !signUpPromptDismissed &&
+    guestData.practices.length === 1;
 
   if (stage === "preparing" && topic) {
     return (
@@ -107,6 +116,11 @@ export function HomeClient({ settings }: { settings: PracticeSettings }) {
           rating={session.rating}
           onPracticeAgain={handlePracticeAgain}
         />
+        {showSignUpPrompt ? (
+          <SignUpPromptModal
+            onClose={() => setSignUpPromptDismissed(true)}
+          />
+        ) : null}
       </div>
     );
   }

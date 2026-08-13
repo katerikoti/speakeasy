@@ -67,6 +67,7 @@ Phase 4 — Guest Experience
 * Display guest streak — done (header pill)
 * Display guest calendar — removed (calendar is now a registered-user feature; /calendar is protected with requireUserId)
 * Handle local storage versioning if needed — done (version: 1)
+* Encourage registration after first completed practice — done (modal shown only to guests, only when local history contains exactly the just-completed practice; dismissible)
 
 Phase 5 — Database
 

@@ -240,6 +240,8 @@ Calendar and settings are registered-user features. Guests do not see the calend
 
 After completing a practice, the application may encourage registration.
 
+The encouragement appears only after the guest's first completed practice. Guests who already have past practices recorded on the device are not shown the prompt again.
+
 The registration message should explain the benefit clearly, for example:
 
 * Keep your streak
