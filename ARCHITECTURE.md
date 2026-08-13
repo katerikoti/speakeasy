@@ -44,13 +44,15 @@ Benefits:
 
 4. Authentication
 
-Authentication should support email/password.
+Authentication uses Auth.js (NextAuth v5) with the Prisma adapter.
 
-Google OAuth may be added if it does not significantly complicate the initial implementation.
+The credentials provider provides email/password authentication.
 
-Passwords must be securely hashed using a suitable authentication library or established password-hashing mechanism.
+Passwords must be securely hashed using the hashing mechanism provided by the authentication stack.
 
 The application must never store plaintext passwords.
+
+Google OAuth may be added if it does not significantly complicate the initial implementation.
 
 Authentication should be isolated from practice logic so that guest mode can operate without authentication.
 
@@ -132,7 +134,13 @@ The exact Prisma schema may differ if implementation requires it.
 
 8. Topic Selection
 
-Topic selection should be handled by a dedicated piece of application logic rather than being embedded directly inside the UI.
+The topic bank is a shared TypeScript module (src/lib/topics.ts).
+
+It is the single source of truth for topics, categories, and difficulty levels.
+
+The module is bundled client-side so guest mode can select topics without a server connection, and the same module is reused when seeding the database.
+
+Topic selection should be handled by a dedicated piece of application logic (src/lib/topicSelection.ts) rather than being embedded directly inside the UI.
 
 The selector should:
 

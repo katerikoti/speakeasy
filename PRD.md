@@ -274,7 +274,7 @@ The user can select which topic categories they want included in their topic poo
 
 Difficulty
 
-If difficulty filtering is implemented in V1, users can select preferred difficulty levels.
+Users can select which difficulty levels they want included in their topic pool.
 
 Settings should have sensible defaults so users can begin immediately without configuring anything.
 

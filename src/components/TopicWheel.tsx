@@ -1,8 +1,9 @@
 "use client";
 
 import { useSyncExternalStore, useState } from "react";
+import { WHEEL_SEGMENTS } from "@/lib/topicSelection";
 
-const SEGMENTS = 10;
+const SEGMENTS = WHEEL_SEGMENTS;
 
 const SEGMENT_COLORS = [
   "#EDEDE9",
@@ -46,7 +47,13 @@ const reducedMotionMedia = () => {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 };
 
-export function TopicWheel() {
+export function TopicWheel({
+  onSpin,
+  onSpinEnd,
+}: {
+  onSpin?: () => number;
+  onSpinEnd?: () => void;
+}) {
   const [rotation, setRotation] = useState(0);
   const [isSpinning, setIsSpinning] = useState(false);
   const reducedMotion = useSyncExternalStore(
@@ -65,7 +72,9 @@ export function TopicWheel() {
     }
     setIsSpinning(true);
 
-    const targetSegment = Math.floor(Math.random() * SEGMENTS);
+    const targetSegment = onSpin
+      ? onSpin()
+      : Math.floor(Math.random() * SEGMENTS);
     const segmentCenter = (targetSegment + 0.5) * (360 / SEGMENTS);
     const targetModulo = (360 - segmentCenter) % 360;
     const currentModulo = ((rotation % 360) + 360) % 360;
@@ -74,10 +83,10 @@ export function TopicWheel() {
       rotation + delta + (reducedMotion ? 0 : FULL_TURNS * 360);
 
     setRotation(nextRotation);
-    window.setTimeout(
-      () => setIsSpinning(false),
-      reducedMotion ? 300 : SPIN_MS,
-    );
+    window.setTimeout(() => {
+      setIsSpinning(false);
+      onSpinEnd?.();
+    }, reducedMotion ? 300 : SPIN_MS);
   }
 
   const gradientStops = SEGMENT_COLORS.map((color, index) => {

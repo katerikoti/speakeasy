@@ -30,14 +30,14 @@ Phase 1 — Visual Foundation
 
 Phase 2 — Topic System
 
-* Define topic data structure
-* Define categories
-* Define difficulty levels
-* Create initial topic bank
-* Implement random topic selection
-* Implement unused-topic filtering
-* Implement topic pool reset when all topics are completed
-* Connect topic selection to wheel animation
+* Define topic data structure — done (src/lib/topics.ts)
+* Define categories — done (13 categories)
+* Define difficulty levels — done (easy/medium/challenge)
+* Create initial topic bank — done (130 topics)
+* Implement random topic selection — done (src/lib/topicSelection.ts)
+* Implement unused-topic filtering — done
+* Implement topic pool reset when all topics are completed — done
+* Connect topic selection to wheel animation — done (deterministic segment landing)
 
 The initial topic bank should contain a large number of high-quality topics rather than a small placeholder collection.
 
