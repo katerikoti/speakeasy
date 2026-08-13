@@ -77,7 +77,7 @@ export function SettingsForm({ initial }: { initial: PracticeSettings }) {
         <legend className="text-sm font-medium text-ink-soft">
           Preparation duration
         </legend>
-        <div className="mt-4 flex flex-wrap gap-3">
+        <div className="mt-4 flex flex-wrap gap-x-3 gap-y-4">
           {PREPARATION_OPTIONS_MINUTES.map((option) => {
             const seconds = minutesToSeconds(option);
             return (
@@ -108,7 +108,7 @@ export function SettingsForm({ initial }: { initial: PracticeSettings }) {
         <legend className="text-sm font-medium text-ink-soft">
           Speaking duration
         </legend>
-        <div className="mt-4 flex flex-wrap gap-3">
+        <div className="mt-4 flex flex-wrap gap-x-3 gap-y-4">
           {SPEAKING_OPTIONS_MINUTES.map((option) => {
             const seconds = minutesToSeconds(option);
             return (
@@ -139,7 +139,7 @@ export function SettingsForm({ initial }: { initial: PracticeSettings }) {
         <legend className="text-sm font-medium text-ink-soft">
           Categories
         </legend>
-        <div className="mt-4 flex flex-wrap gap-3">
+        <div className="mt-4 flex flex-wrap gap-x-3 gap-y-4">
           {TOPIC_CATEGORIES.map((category) => {
             const selected = settings.selectedCategories.includes(category);
             return (
@@ -165,7 +165,7 @@ export function SettingsForm({ initial }: { initial: PracticeSettings }) {
         <legend className="text-sm font-medium text-ink-soft">
           Difficulty
         </legend>
-        <div className="mt-4 flex flex-wrap gap-3">
+        <div className="mt-4 flex flex-wrap gap-x-3 gap-y-4">
           {TOPIC_DIFFICULTIES.map((difficulty) => {
             const selected = settings.selectedDifficulties.includes(difficulty);
             return (
