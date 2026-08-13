@@ -68,13 +68,13 @@ Phase 4 — Guest Experience
 
 Phase 5 — Database
 
-* Set up PostgreSQL database
-* Configure Prisma
-* Create Prisma schema
-* Create migrations
-* Seed topic data
-* Create database access layer
-* Test database connection
+* Set up PostgreSQL database — pending (Neon, needs DATABASE_URL)
+* Configure Prisma — done (Prisma 7, prisma.config.ts, Neon adapter)
+* Create Prisma schema — done (users/accounts/sessions/topics/practices/settings)
+* Create migrations — pending (needs DATABASE_URL)
+* Seed topic data — pending (seed script ready, prisma/seed.ts)
+* Create database access layer — done (src/lib/db.ts, src/lib/db/practices.ts)
+* Test database connection — pending (needs DATABASE_URL)
 
 Phase 6 — Authentication
 

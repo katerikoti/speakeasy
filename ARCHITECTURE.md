@@ -42,6 +42,10 @@ Benefits:
 * Good integration with TypeScript
 * Easy local development
 
+Prisma 7 requires a driver adapter at runtime. The client connects through the Neon serverless driver via `@prisma/adapter-neon`, using the pooled `DATABASE_URL` (see `prisma.config.ts` for CLI/migration connections).
+
+The generated client is written to `src/generated/prisma` and is gitignored; it is regenerated on install (`postinstall: prisma generate`).
+
 4. Authentication
 
 Authentication uses Auth.js (NextAuth v5) with the Prisma adapter.
