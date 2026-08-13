@@ -38,7 +38,7 @@ export function Header({ streak = 0 }: { streak?: number }) {
           aria-label={`${streak}-day streak`}
           title={`${streak}-day streak`}
         >
-          <StreakIcon className="h-4 w-4 text-ink" />
+          <StreakIcon className="h-5 w-5 text-ink" />
           <span className="text-base font-bold tabular-nums text-ink">
             {streak}
           </span>
