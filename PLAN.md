@@ -8,14 +8,14 @@ Do not implement large unrelated features together.
 
 Phase 0 — Project Foundation
 
-* Create Next.js project
-* Configure TypeScript
-* Configure Tailwind CSS
-* Establish project folder structure
-* Add basic linting/formatting
-* Create initial README
-* Create documentation files
-* Confirm development server works
+* Create Next.js project — done
+* Configure TypeScript — done
+* Configure Tailwind CSS — done
+* Establish project folder structure — done
+* Add basic linting/formatting — done (ESLint)
+* Create initial README — done
+* Create documentation files — done
+* Confirm development server works — done
 
 Phase 1 — Visual Foundation
 
