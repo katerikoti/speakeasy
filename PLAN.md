@@ -23,7 +23,7 @@ Phase 1 — Visual Foundation
 * Add warm neutral color palette — done
 * Establish typography — done (Geist sans + Lora display)
 * Create responsive page shell — done
-* Create header/navigation — done (streak pill + sign in for guests, calendar/settings buttons for authenticated users only)
+* Create header/navigation — done (streak + sign in for guests; name text, sign-out icon, calendar/settings links for authenticated users only)
 * Create initial home screen — done
 * Create topic wheel visual component — done (30 alternating light/dark neutral slices for a multi-part look)
 * Reveal topic after spin — done (wheel is replaced by the topic card; a small "Spin again" button reopens the wheel)
@@ -49,6 +49,7 @@ Phase 3 — Core Practice Flow
 * Implement preparation countdown — done (wall-clock timestamp based)
 * Implement optional notes — done (client state only, not persisted)
 * Allow starting speaking before preparation ends — done
+* Add get-ready countdown before speaking — done (3, 2, 1, wall-clock based, cannot be skipped)
 * Implement speaking timer — done (wall-clock timestamp based)
 * Allow early speaking completion — done
 * Implement reflection stage — done
@@ -86,6 +87,7 @@ Phase 6 — Authentication
 * Implement authenticated session handling — done (JWT strategy, /api/auth/[...nextauth])
 * Protect authenticated operations — done (requireUserId from session)
 * Add Google authentication if practical without delaying core functionality — deferred (needs Google OAuth credentials)
+* Fix session dropping when switching tabs — done (trustHost: true + explicit 30-day session.maxAge)
 
 Phase 7 — Guest-to-Account Migration
 
@@ -106,12 +108,12 @@ Phase 8 — Registered User Experience
 * Implement registered-user topic filtering
 * Implement registered-user topic repetition reset
 * Calculate registered streak
-* Implement practice calendar (header + route already restricted to authenticated users; wire to database practices)
-* Implement settings (header button already restricted to authenticated users)
-* Implement preparation duration setting
-* Implement speaking duration setting
-* Implement category selection
-* Implement difficulty selection if included
+* Implement practice calendar — done (header + route restricted to authenticated users; completed days show the topics practiced)
+* Implement settings — done (/settings page, updateSettingsAction server action, server-validated)
+* Implement preparation duration setting — done (30/45/60/90/120s, persisted in UserSettings, fed into the practice flow)
+* Implement speaking duration setting — done (60/90/120/180/300s, persisted in UserSettings, fed into the practice flow)
+* Implement category selection — done (persisted in UserSettings, feeds topic-pool preferences)
+* Implement difficulty selection — done (persisted in UserSettings, feeds topic-pool preferences)
 
 Phase 9 — PWA
 

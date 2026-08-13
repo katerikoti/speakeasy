@@ -54,6 +54,8 @@ The credentials provider provides email/password authentication.
 
 Sessions use the JWT strategy (required for credentials sign-in). The user id is written into the session via the `session` callback from the token `sub` claim, and `src/lib/session.ts` exposes `requireUserId()` for server-side route protection. Authenticated operations always derive the user id from the session, never from the client.
 
+The Auth.js config sets `trustHost: true` so session lookups work across tabs and hosts in all environments, and an explicit 30-day `session.maxAge`.
+
 Passwords are hashed with bcryptjs (12 rounds) before storage (`src/lib/passwords.ts`) and verified in the credentials `authorize` callback.
 
 Registration is handled by `POST /api/auth/register`, which validates input server-side, creates the user together with their default `UserSettings` in a transaction, and rejects duplicate emails.
@@ -191,6 +193,8 @@ The `/calendar` route is protected with `requireUserId` and redirects guests to 
 
 The calendar should use practice dates to determine completed days.
 
+Selecting a completed day shows the topics practiced on that day.
+
 Multiple practices on the same date count as one completed day for streak purposes.
 
 11. Practice Flow State
@@ -203,6 +207,8 @@ TOPIC_SELECTED
   ↓
 PREPARING
   ↓
+COUNTDOWN
+  ↓
 SPEAKING
   ↓
 REFLECTION
@@ -211,9 +217,13 @@ COMPLETED
 
 The user may transition:
 
-PREPARING → SPEAKING
+PREPARING → COUNTDOWN
 
-before the preparation timer finishes.
+before the preparation timer finishes (via the explicit start action).
+
+A 3-second get-ready countdown runs between preparation and speaking.
+
+The countdown uses the same wall-clock-driven tick pattern as the other timers and cannot be skipped.
 
 The user may transition:
 
@@ -292,6 +302,10 @@ Server-side functionality should handle:
 * Practice history retrieval
 * Guest migration
 * Topic data where appropriate
+
+User settings are managed through a `/settings` page (server-rendered, protected by `requireUserId`). The settings form posts to the `updateSettingsAction` server action (`src/app/actions.ts`), which validates input server-side against the allowed duration options and the valid category/difficulty lists, persists the `UserSettings` row, and revalidates the route.
+
+Settings flow into the practice flow as a prop: the home route reads the current user’s settings (defaults for guests) and passes them to the client `HomeClient`, which uses them for timer durations and topic-pool preferences.
 
 Client-side functionality should handle:
 

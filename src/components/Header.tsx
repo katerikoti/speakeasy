@@ -1,9 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useSession } from "next-auth/react";
-import { CalendarIcon, SettingsIcon, StreakIcon } from "./icons";
-import { signOutAction } from "@/app/actions";
+import { signOut, useSession } from "next-auth/react";
+import { CalendarIcon, LogOutIcon, SettingsIcon, StreakIcon } from "./icons";
 
 function IconButton({
   label,
@@ -47,15 +46,21 @@ export function Header({ streak = 0 }: { streak?: number }) {
       <div className="flex items-center gap-3">
         {status === "authenticated" && session?.user ? (
           <>
-            <form action={signOutAction}>
-              <button
-                type="submit"
-                className="max-w-28 truncate rounded-full bg-linen px-4 py-2 text-sm font-medium text-ink shadow-sm transition-colors hover:bg-almond-cream"
-                title="Sign out"
-              >
-                {displayName}
-              </button>
-            </form>
+            <span
+              className="max-w-24 truncate text-sm font-medium text-ink"
+              title={session.user.name ?? session.user.email ?? "Account"}
+            >
+              {displayName}
+            </span>
+            <button
+              type="button"
+              onClick={() => signOut()}
+              aria-label="Sign out"
+              title="Sign out"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-linen text-ink shadow-sm transition-colors hover:bg-almond-cream"
+            >
+              <LogOutIcon className="h-5 w-5" />
+            </button>
             <Link
               href="/calendar"
               aria-label="Open calendar"

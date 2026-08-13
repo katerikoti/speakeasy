@@ -2,16 +2,19 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { addGuestPractice } from "@/lib/guestStorage";
-import { DEFAULT_SETTINGS } from "@/lib/settings";
+import { DEFAULT_SETTINGS, type PracticeSettings } from "@/lib/settings";
 import type { Topic } from "@/lib/topics";
 
 export type PracticeStage =
   | "idle"
   | "topic"
   | "preparing"
+  | "countdown"
   | "speaking"
   | "reflection"
   | "completed";
+
+const COUNTDOWN_SECONDS = 3;
 
 /**
  * Runs a short interval while `endsAt` is set and calls `onTick` from the
@@ -35,7 +38,7 @@ function remainingSeconds(endsAt: number | null, fallback: number | null) {
   return Math.max(0, Math.ceil((endsAt - Date.now()) / 1000));
 }
 
-export function usePracticeSession() {
+export function usePracticeSession(settings: PracticeSettings = DEFAULT_SETTINGS) {
   const [stage, setStage] = useState<PracticeStage>("idle");
   const [topic, setTopic] = useState<Topic | null>(null);
   const [preparationEndsAt, setPreparationEndsAt] = useState<number | null>(
@@ -44,6 +47,10 @@ export function usePracticeSession() {
   const [preparationRemaining, setPreparationRemaining] = useState<
     number | null
   >(null);
+  const [countdownEndsAt, setCountdownEndsAt] = useState<number | null>(null);
+  const [countdownRemaining, setCountdownRemaining] = useState<number | null>(
+    null,
+  );
   const [speakingEndsAt, setSpeakingEndsAt] = useState<number | null>(null);
   const [speakingRemaining, setSpeakingRemaining] = useState<number | null>(
     null,
@@ -55,12 +62,12 @@ export function usePracticeSession() {
   );
 
   const startSpeaking = useCallback(() => {
-    const endsAt = Date.now() + DEFAULT_SETTINGS.speakingDurationSeconds * 1000;
+    const endsAt = Date.now() + COUNTDOWN_SECONDS * 1000;
     setPreparationEndsAt(null);
     setPreparationRemaining(null);
-    setSpeakingEndsAt(endsAt);
-    setSpeakingRemaining(DEFAULT_SETTINGS.speakingDurationSeconds);
-    setStage("speaking");
+    setCountdownEndsAt(endsAt);
+    setCountdownRemaining(COUNTDOWN_SECONDS);
+    setStage("countdown");
   }, []);
 
   const finishSpeaking = useCallback(() => {
@@ -68,6 +75,27 @@ export function usePracticeSession() {
     setSpeakingRemaining(null);
     setStage("reflection");
   }, []);
+
+  const beginSpeaking = useCallback(() => {
+    setCountdownEndsAt(null);
+    setCountdownRemaining(null);
+    const endsAt =
+      Date.now() + settings.speakingDurationSeconds * 1000;
+    setSpeakingEndsAt(endsAt);
+    setSpeakingRemaining(settings.speakingDurationSeconds);
+    setStage("speaking");
+  }, [settings.speakingDurationSeconds]);
+
+  const tickCountdown = useCallback(() => {
+    if (countdownEndsAt === null) {
+      return;
+    }
+    const next = remainingSeconds(countdownEndsAt, null);
+    setCountdownRemaining(next);
+    if (next !== null && next <= 0) {
+      beginSpeaking();
+    }
+  }, [countdownEndsAt, beginSpeaking]);
 
   const tickPreparation = useCallback(() => {
     if (preparationEndsAt === null) {
@@ -92,6 +120,7 @@ export function usePracticeSession() {
   }, [speakingEndsAt, finishSpeaking]);
 
   useTickInterval(preparationEndsAt, tickPreparation);
+  useTickInterval(countdownEndsAt, tickCountdown);
   useTickInterval(speakingEndsAt, tickSpeaking);
 
   const revealTopic = useCallback((selected: Topic) => {
@@ -99,6 +128,8 @@ export function usePracticeSession() {
     setStage("topic");
     setPreparationEndsAt(null);
     setPreparationRemaining(null);
+    setCountdownEndsAt(null);
+    setCountdownRemaining(null);
     setSpeakingEndsAt(null);
     setSpeakingRemaining(null);
     setNotes("");
@@ -108,11 +139,11 @@ export function usePracticeSession() {
 
   const beginPreparation = useCallback(() => {
     const endsAt =
-      Date.now() + DEFAULT_SETTINGS.preparationDurationSeconds * 1000;
+      Date.now() + settings.preparationDurationSeconds * 1000;
     setPreparationEndsAt(endsAt);
-    setPreparationRemaining(DEFAULT_SETTINGS.preparationDurationSeconds);
+    setPreparationRemaining(settings.preparationDurationSeconds);
     setStage("preparing");
-  }, []);
+  }, [settings.preparationDurationSeconds]);
 
   const complete = useCallback(() => {
     if (topic === null) {
@@ -135,6 +166,8 @@ export function usePracticeSession() {
     setTopic(null);
     setPreparationEndsAt(null);
     setPreparationRemaining(null);
+    setCountdownEndsAt(null);
+    setCountdownRemaining(null);
     setSpeakingEndsAt(null);
     setSpeakingRemaining(null);
     setNotes("");
@@ -148,6 +181,7 @@ export function usePracticeSession() {
     notes,
     rating,
     preparationRemaining,
+    countdownRemaining,
     speakingRemaining,
     completedPracticeId,
     revealTopic,

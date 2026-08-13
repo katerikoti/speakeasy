@@ -176,6 +176,10 @@ The user should be able to skip preparation if their settings allow immediate pr
 
 5.6 Speaking Stage
 
+Before speaking begins, a short get-ready countdown (3, 2, 1) is shown on the screen.
+
+The countdown appears after preparation finishes or when the user chooses to start early.
+
 The topic remains accessible while speaking.
 
 The user starts the speaking timer when ready.
@@ -284,13 +288,15 @@ Settings should have sensible defaults so users can begin immediately without co
 
 The calendar shows which days the user completed at least one practice.
 
+Selecting a completed day shows the topics practiced on that day.
+
 The calendar is available to registered users only.
 
 Guests do not see the calendar.
 
 The primary purpose is habit tracking.
 
-The calendar does not need to expose every detail of every practice in V1.
+Completed days show the topic prompts practiced that day, so the calendar doubles as a light practice history.
 
 A completed day should be visually distinguishable from an uncompleted day.
 
