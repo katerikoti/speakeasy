@@ -4,24 +4,6 @@ import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import { CalendarIcon, LogOutIcon, SettingsIcon, StreakIcon } from "./icons";
 
-function IconButton({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      aria-label={label}
-      className="flex h-11 w-11 items-center justify-center rounded-full bg-linen text-ink shadow-sm transition-colors hover:bg-almond-cream"
-    >
-      {children}
-    </button>
-  );
-}
-
 export function Header({ streak = 0 }: { streak?: number }) {
   const { data: session, status } = useSession();
   const displayName =
@@ -52,15 +34,6 @@ export function Header({ streak = 0 }: { streak?: number }) {
             >
               {displayName}
             </span>
-            <button
-              type="button"
-              onClick={() => signOut()}
-              aria-label="Sign out"
-              title="Sign out"
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-linen text-ink shadow-sm transition-colors hover:bg-almond-cream"
-            >
-              <LogOutIcon className="h-5 w-5" />
-            </button>
             <Link
               href="/calendar"
               aria-label="Open calendar"
@@ -68,9 +41,22 @@ export function Header({ streak = 0 }: { streak?: number }) {
             >
               <CalendarIcon className="h-5 w-5" />
             </Link>
-            <IconButton label="Open settings">
+            <Link
+              href="/settings"
+              aria-label="Open settings"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-linen text-ink shadow-sm transition-colors hover:bg-almond-cream"
+            >
               <SettingsIcon className="h-5 w-5" />
-            </IconButton>
+            </Link>
+            <button
+              type="button"
+              onClick={() => signOut()}
+              aria-label="Sign out"
+              title="Sign out"
+              className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-linen text-ink shadow-sm transition-colors hover:bg-almond-cream"
+            >
+              <LogOutIcon className="h-5 w-5" />
+            </button>
           </>
         ) : (
           <Link

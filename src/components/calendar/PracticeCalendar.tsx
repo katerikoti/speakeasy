@@ -183,13 +183,19 @@ export function PracticeCalendar() {
           <p className="text-sm font-medium text-ink-soft">
             {formatDayKey(selectedKey)}
           </p>
-          <ul className="mt-3 flex flex-col gap-2">
+          <ul className="mt-3 flex flex-col gap-2.5">
             {selectedTopics.map((topic) => (
               <li
                 key={topic.id}
-                className="font-display text-base leading-snug text-ink"
+                className="flex items-start gap-2.5 font-display text-base leading-snug text-ink"
               >
-                {topic.prompt}
+                {selectedTopics.length > 1 ? (
+                  <span
+                    aria-hidden="true"
+                    className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-almond-silk"
+                  />
+                ) : null}
+                <span>{topic.prompt}</span>
               </li>
             ))}
           </ul>
