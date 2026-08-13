@@ -183,6 +183,12 @@ from the user’s practice history.
 
 10. Calendar
 
+The calendar is a registered-user feature.
+
+Guests do not see the calendar or settings in the header.
+
+The `/calendar` route is protected with `requireUserId` and redirects guests to `/login`.
+
 The calendar should use practice dates to determine completed days.
 
 Multiple practices on the same date count as one completed day for streak purposes.
@@ -255,8 +261,8 @@ Potential major components:
 Home
 ├── Header
 ├── StreakDisplay
-├── CalendarButton
-├── SettingsButton
+├── CalendarButton (authenticated only)
+├── SettingsButton (authenticated only)
 └── TopicWheel
 Practice
 ├── TopicDisplay

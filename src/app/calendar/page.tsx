@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { PracticeCalendar } from "@/components/calendar/PracticeCalendar";
+import { requireUserId } from "@/lib/session";
 
-export default function CalendarPage() {
+export default async function CalendarPage() {
+  await requireUserId();
+
   return (
     <div className="flex min-h-dvh flex-col">
       <header className="mx-auto flex w-full max-w-md items-center px-6 py-5">

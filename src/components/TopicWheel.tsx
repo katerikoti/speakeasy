@@ -5,17 +5,15 @@ import { WHEEL_SEGMENTS } from "@/lib/topicSelection";
 
 const SEGMENTS = WHEEL_SEGMENTS;
 
-const SEGMENT_COLORS = [
+const VISUAL_SLICES = 30;
+
+const SLICE_COLORS = [
   "#EDEDE9",
   "#E3D5CA",
-  "#D6CCC2",
   "#F5EBE0",
+  "#D6CCC2",
   "#D5BDAF",
-  "#E8DFD4",
   "#CDBFB0",
-  "#DBD3C9",
-  "#EFE7DC",
-  "#C9BAA9",
 ];
 
 const FULL_TURNS = 5;
@@ -89,9 +87,10 @@ export function TopicWheel({
     }, reducedMotion ? 300 : SPIN_MS);
   }
 
-  const gradientStops = SEGMENT_COLORS.map((color, index) => {
-    const start = (index / SEGMENTS) * 100;
-    const end = ((index + 1) / SEGMENTS) * 100;
+  const gradientStops = Array.from({ length: VISUAL_SLICES }, (_, index) => {
+    const start = (index / VISUAL_SLICES) * 100;
+    const end = ((index + 1) / VISUAL_SLICES) * 100;
+    const color = SLICE_COLORS[index % SLICE_COLORS.length];
     return `${color} ${start}% ${end}%`;
   }).join(", ");
 

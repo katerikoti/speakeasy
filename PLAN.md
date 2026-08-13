@@ -23,7 +23,7 @@ Phase 1 — Visual Foundation
 * Add warm neutral color palette — done
 * Establish typography — done (Geist sans + Lora display)
 * Create responsive page shell — done
-* Create header/navigation — done (streak pill, calendar/settings buttons)
+* Create header/navigation — done (streak pill + sign in for guests, calendar/settings buttons for authenticated users only)
 * Create initial home screen — done
 * Create topic wheel visual component — done (10-segment palette wheel)
 * Ensure mobile-first layout — done
@@ -63,7 +63,7 @@ Phase 4 — Guest Experience
 * Store ratings locally — done
 * Calculate guest streak — done (src/lib/streak.ts, derived from dates)
 * Display guest streak — done (header pill)
-* Display guest calendar — done (/calendar)
+* Display guest calendar — removed (calendar is now a registered-user feature; /calendar is protected with requireUserId)
 * Handle local storage versioning if needed — done (version: 1)
 
 Phase 5 — Database
@@ -105,8 +105,8 @@ Phase 8 — Registered User Experience
 * Implement registered-user topic filtering
 * Implement registered-user topic repetition reset
 * Calculate registered streak
-* Implement practice calendar
-* Implement settings
+* Implement practice calendar (header + route already restricted to authenticated users; wire to database practices)
+* Implement settings (header button already restricted to authenticated users)
 * Implement preparation duration setting
 * Implement speaking duration setting
 * Implement category selection

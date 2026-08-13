@@ -229,7 +229,9 @@ Guest users can use the full core practice flow without creating an account.
 
 Guest data is stored locally.
 
-Guest users should be able to see their current practice progress during the current device/session.
+Guest users should be able to see their current practice progress (such as their streak) during the current device/session.
+
+Calendar and settings are registered-user features. Guests do not see the calendar or settings.
 
 After completing a practice, the application may encourage registration.
 
@@ -281,6 +283,10 @@ Settings should have sensible defaults so users can begin immediately without co
 9. Calendar
 
 The calendar shows which days the user completed at least one practice.
+
+The calendar is available to registered users only.
+
+Guests do not see the calendar.
 
 The primary purpose is habit tracking.
 
