@@ -17,23 +17,71 @@ import {
   type TopicDifficulty,
 } from "@/lib/topics";
 
-function OptionPill({
+function OptionRow({
+  name,
+  value,
   selected,
+  onSelect,
   children,
 }: {
+  name: string;
+  value: string;
   selected: boolean;
+  onSelect: () => void;
   children: React.ReactNode;
 }) {
   return (
-    <span
-      className={`cursor-pointer rounded-full px-4 py-2 text-sm font-medium ring-1 transition-colors focus-within:ring-2 focus-within:ring-almond-silk ${
+    <label
+      className={`flex cursor-pointer items-center gap-3 rounded-2xl px-4 py-3 ring-1 transition-colors ${
         selected
           ? "bg-ink text-parchment ring-ink"
           : "bg-linen text-ink ring-bone/60 hover:bg-almond-cream"
       }`}
     >
-      {children}
-    </span>
+      <input
+        type="checkbox"
+        name={name}
+        value={value}
+        checked={selected}
+        onChange={onSelect}
+        className="h-4 w-4 accent-almond-silk"
+      />
+      <span className="text-sm font-medium leading-snug">{children}</span>
+    </label>
+  );
+}
+
+function DurationRow({
+  name,
+  value,
+  selected,
+  onSelect,
+  children,
+}: {
+  name: string;
+  value: number;
+  selected: boolean;
+  onSelect: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <label
+      className={`flex cursor-pointer items-center gap-3 rounded-2xl px-4 py-3 ring-1 transition-colors ${
+        selected
+          ? "bg-ink text-parchment ring-ink"
+          : "bg-linen text-ink ring-bone/60 hover:bg-almond-cream"
+      }`}
+    >
+      <input
+        type="radio"
+        name={name}
+        value={value}
+        checked={selected}
+        onChange={onSelect}
+        className="h-4 w-4 accent-almond-silk"
+      />
+      <span className="text-sm font-medium leading-snug">{children}</span>
+    </label>
   );
 }
 
@@ -71,34 +119,30 @@ export function SettingsForm({ initial }: { initial: PracticeSettings }) {
   return (
     <form
       action={formAction}
-      className="mx-auto flex w-full max-w-md flex-1 flex-col gap-4 px-6 pb-12"
+      className="mx-auto flex w-full max-w-md flex-1 flex-col gap-6 px-6 pb-12"
     >
       <fieldset>
         <legend className="text-sm font-medium text-ink-soft">
           Preparation duration
         </legend>
-        <div className="mt-4 flex flex-wrap gap-4">
+        <div className="mt-3 grid grid-cols-2 gap-3">
           {PREPARATION_OPTIONS_MINUTES.map((option) => {
             const seconds = minutesToSeconds(option);
             return (
-              <label key={option}>
-                <input
-                  type="radio"
-                  name="preparationDurationSeconds"
-                  value={seconds}
-                  checked={settings.preparationDurationSeconds === seconds}
-                  onChange={() =>
-                    setSettings((previous) => ({
-                      ...previous,
-                      preparationDurationSeconds: seconds,
-                    }))
-                  }
-                  className="sr-only"
-                />
-                <OptionPill selected={settings.preparationDurationSeconds === seconds}>
-                  {option} min
-                </OptionPill>
-              </label>
+              <DurationRow
+                key={option}
+                name="preparationDurationSeconds"
+                value={seconds}
+                selected={settings.preparationDurationSeconds === seconds}
+                onSelect={() =>
+                  setSettings((previous) => ({
+                    ...previous,
+                    preparationDurationSeconds: seconds,
+                  }))
+                }
+              >
+                {option} min
+              </DurationRow>
             );
           })}
         </div>
@@ -108,28 +152,24 @@ export function SettingsForm({ initial }: { initial: PracticeSettings }) {
         <legend className="text-sm font-medium text-ink-soft">
           Speaking duration
         </legend>
-        <div className="mt-4 flex flex-wrap gap-4">
+        <div className="mt-3 grid grid-cols-2 gap-3">
           {SPEAKING_OPTIONS_MINUTES.map((option) => {
             const seconds = minutesToSeconds(option);
             return (
-              <label key={option}>
-                <input
-                  type="radio"
-                  name="speakingDurationSeconds"
-                  value={seconds}
-                  checked={settings.speakingDurationSeconds === seconds}
-                  onChange={() =>
-                    setSettings((previous) => ({
-                      ...previous,
-                      speakingDurationSeconds: seconds,
-                    }))
-                  }
-                  className="sr-only"
-                />
-                <OptionPill selected={settings.speakingDurationSeconds === seconds}>
-                  {option} min
-                </OptionPill>
-              </label>
+              <DurationRow
+                key={option}
+                name="speakingDurationSeconds"
+                value={seconds}
+                selected={settings.speakingDurationSeconds === seconds}
+                onSelect={() =>
+                  setSettings((previous) => ({
+                    ...previous,
+                    speakingDurationSeconds: seconds,
+                  }))
+                }
+              >
+                {option} min
+              </DurationRow>
             );
           })}
         </div>
@@ -139,23 +179,19 @@ export function SettingsForm({ initial }: { initial: PracticeSettings }) {
         <legend className="text-sm font-medium text-ink-soft">
           Categories
         </legend>
-        <div className="mt-4 flex flex-wrap gap-4">
+        <div className="mt-3 grid grid-cols-2 gap-3">
           {TOPIC_CATEGORIES.map((category) => {
             const selected = settings.selectedCategories.includes(category);
             return (
-              <label key={category}>
-                <input
-                  type="checkbox"
-                  name="category"
-                  value={category}
-                  checked={selected}
-                  onChange={() => toggleCategory(category)}
-                  className="sr-only"
-                />
-                <OptionPill selected={selected}>
-                  {CATEGORY_LABELS[category]}
-                </OptionPill>
-              </label>
+              <OptionRow
+                key={category}
+                name="category"
+                value={category}
+                selected={selected}
+                onSelect={() => toggleCategory(category)}
+              >
+                {CATEGORY_LABELS[category]}
+              </OptionRow>
             );
           })}
         </div>
@@ -165,23 +201,19 @@ export function SettingsForm({ initial }: { initial: PracticeSettings }) {
         <legend className="text-sm font-medium text-ink-soft">
           Difficulty
         </legend>
-        <div className="mt-4 flex flex-wrap gap-4">
+        <div className="mt-3 grid grid-cols-2 gap-3">
           {TOPIC_DIFFICULTIES.map((difficulty) => {
             const selected = settings.selectedDifficulties.includes(difficulty);
             return (
-              <label key={difficulty}>
-                <input
-                  type="checkbox"
-                  name="difficulty"
-                  value={difficulty}
-                  checked={selected}
-                  onChange={() => toggleDifficulty(difficulty)}
-                  className="sr-only"
-                />
-                <OptionPill selected={selected}>
-                  {DIFFICULTY_LABELS[difficulty]}
-                </OptionPill>
-              </label>
+              <OptionRow
+                key={difficulty}
+                name="difficulty"
+                value={difficulty}
+                selected={selected}
+                onSelect={() => toggleDifficulty(difficulty)}
+              >
+                {DIFFICULTY_LABELS[difficulty]}
+              </OptionRow>
             );
           })}
         </div>
@@ -199,7 +231,7 @@ export function SettingsForm({ initial }: { initial: PracticeSettings }) {
       <button
         type="submit"
         disabled={isPending}
-        className="rounded-full bg-ink px-8 py-3 font-medium text-parchment shadow-sm transition-colors hover:bg-ink-soft disabled:cursor-not-allowed disabled:opacity-60"
+        className="cursor-pointer rounded-full bg-ink px-8 py-3 font-medium text-parchment shadow-sm transition-colors hover:bg-ink-soft disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isPending ? "Saving…" : "Save settings"}
       </button>
