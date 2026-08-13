@@ -32,7 +32,7 @@ function OptionRow({
 }) {
   return (
     <label
-      className={`flex cursor-pointer items-center gap-3 rounded-2xl px-4 py-3 ring-1 transition-colors ${
+      className={`flex cursor-pointer items-center gap-3 rounded-2xl px-4 py-3 ring-1 transition-colors has-focus-visible:ring-2 has-focus-visible:ring-ink ${
         selected
           ? "bg-ink text-parchment ring-ink"
           : "bg-linen text-ink ring-bone/60 hover:bg-almond-cream"
@@ -44,7 +44,7 @@ function OptionRow({
         value={value}
         checked={selected}
         onChange={onSelect}
-        className="h-4 w-4 accent-almond-silk"
+        className="sr-only"
       />
       <span className="text-sm font-medium leading-snug">{children}</span>
     </label>
@@ -66,7 +66,7 @@ function DurationRow({
 }) {
   return (
     <label
-      className={`flex cursor-pointer items-center gap-3 rounded-2xl px-4 py-3 ring-1 transition-colors ${
+      className={`flex cursor-pointer items-center gap-3 rounded-2xl px-4 py-3 ring-1 transition-colors has-focus-visible:ring-2 has-focus-visible:ring-ink ${
         selected
           ? "bg-ink text-parchment ring-ink"
           : "bg-linen text-ink ring-bone/60 hover:bg-almond-cream"
@@ -78,7 +78,7 @@ function DurationRow({
         value={value}
         checked={selected}
         onChange={onSelect}
-        className="h-4 w-4 accent-almond-silk"
+        className="sr-only"
       />
       <span className="text-sm font-medium leading-snug">{children}</span>
     </label>
