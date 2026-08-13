@@ -19,9 +19,21 @@ export const DEFAULT_SETTINGS: PracticeSettings = {
   selectedDifficulties: TOPIC_DIFFICULTIES,
 };
 
-export const PREPARATION_OPTIONS = [30, 45, 60, 90, 120];
+export const PREPARATION_OPTIONS_MINUTES = [0.5, 1, 2, 3];
 
-export const SPEAKING_OPTIONS = [60, 90, 120, 180, 300];
+export const SPEAKING_OPTIONS_MINUTES = [0.5, 1, 2, 3, 5];
+
+export function minutesToSeconds(minutes: number): number {
+  return Math.round(minutes * 60);
+}
+
+const PREPARATION_SECONDS = new Set(
+  PREPARATION_OPTIONS_MINUTES.map(minutesToSeconds),
+);
+
+const SPEAKING_SECONDS = new Set(
+  SPEAKING_OPTIONS_MINUTES.map(minutesToSeconds),
+);
 
 export interface ParsedSettings {
   preparationDurationSeconds: number;
@@ -35,15 +47,8 @@ export interface SettingsValidation {
   error?: string;
 }
 
-function isNumberInOptions(
-  value: unknown,
-  options: readonly number[],
-): value is number {
-  return (
-    typeof value === "number" &&
-    Number.isInteger(value) &&
-    options.includes(value)
-  );
+function isInSet(value: unknown, set: Set<number>): value is number {
+  return typeof value === "number" && Number.isInteger(value) && set.has(value);
 }
 
 function isCategory(value: string): value is TopicCategory {
@@ -59,10 +64,10 @@ function isDifficulty(value: string): value is TopicDifficulty {
  * user-facing error message.
  */
 export function validateSettings(input: ParsedSettings): SettingsValidation {
-  if (!isNumberInOptions(input.preparationDurationSeconds, PREPARATION_OPTIONS)) {
+  if (!isInSet(input.preparationDurationSeconds, PREPARATION_SECONDS)) {
     return { error: "Choose a valid preparation duration." };
   }
-  if (!isNumberInOptions(input.speakingDurationSeconds, SPEAKING_OPTIONS)) {
+  if (!isInSet(input.speakingDurationSeconds, SPEAKING_SECONDS)) {
     return { error: "Choose a valid speaking duration." };
   }
   if (input.selectedCategories.length === 0) {

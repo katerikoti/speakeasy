@@ -110,8 +110,8 @@ Phase 8 — Registered User Experience
 * Calculate registered streak
 * Implement practice calendar — done (header + route restricted to authenticated users; completed days show the topics practiced)
 * Implement settings — done (/settings page, updateSettingsAction server action, server-validated)
-* Implement preparation duration setting — done (30/45/60/90/120s, persisted in UserSettings, fed into the practice flow)
-* Implement speaking duration setting — done (60/90/120/180/300s, persisted in UserSettings, fed into the practice flow)
+* Implement preparation duration setting — done (0.5/1/2/3 minutes, persisted in UserSettings, fed into the practice flow)
+* Implement speaking duration setting — done (0.5/1/2/3/5 minutes, persisted in UserSettings, fed into the practice flow)
 * Implement category selection — done (persisted in UserSettings, feeds topic-pool preferences)
 * Implement difficulty selection — done (persisted in UserSettings, feeds topic-pool preferences)
 

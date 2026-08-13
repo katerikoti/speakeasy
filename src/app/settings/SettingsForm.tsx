@@ -3,8 +3,9 @@
 import { useActionState, useState } from "react";
 import { updateSettingsAction, type SettingsFormState } from "@/app/actions";
 import {
-  PREPARATION_OPTIONS,
-  SPEAKING_OPTIONS,
+  PREPARATION_OPTIONS_MINUTES,
+  SPEAKING_OPTIONS_MINUTES,
+  minutesToSeconds,
   type PracticeSettings,
 } from "@/lib/settings";
 import {
@@ -43,17 +44,6 @@ export function SettingsForm({ initial }: { initial: PracticeSettings }) {
     {},
   );
 
-  function setPreparationDurationSeconds(value: number) {
-    setSettings((previous) => ({
-      ...previous,
-      preparationDurationSeconds: value,
-    }));
-  }
-
-  function setSpeakingDurationSeconds(value: number) {
-    setSettings((previous) => ({ ...previous, speakingDurationSeconds: value }));
-  }
-
   function toggleCategory(category: TopicCategory) {
     setSettings((previous) => {
       const has = previous.selectedCategories.includes(category);
@@ -87,22 +77,30 @@ export function SettingsForm({ initial }: { initial: PracticeSettings }) {
         <legend className="text-sm font-medium text-ink-soft">
           Preparation duration
         </legend>
-        <div className="mt-3 flex flex-wrap gap-2">
-          {PREPARATION_OPTIONS.map((option) => (
-            <label key={option}>
-              <input
-                type="radio"
-                name="preparationDurationSeconds"
-                value={option}
-                checked={settings.preparationDurationSeconds === option}
-                onChange={() => setPreparationDurationSeconds(option)}
-                className="sr-only"
-              />
-              <OptionPill selected={settings.preparationDurationSeconds === option}>
-                {option}s
-              </OptionPill>
-            </label>
-          ))}
+        <div className="mt-3 flex flex-wrap gap-3">
+          {PREPARATION_OPTIONS_MINUTES.map((option) => {
+            const seconds = minutesToSeconds(option);
+            return (
+              <label key={option}>
+                <input
+                  type="radio"
+                  name="preparationDurationSeconds"
+                  value={seconds}
+                  checked={settings.preparationDurationSeconds === seconds}
+                  onChange={() =>
+                    setSettings((previous) => ({
+                      ...previous,
+                      preparationDurationSeconds: seconds,
+                    }))
+                  }
+                  className="sr-only"
+                />
+                <OptionPill selected={settings.preparationDurationSeconds === seconds}>
+                  {option} min
+                </OptionPill>
+              </label>
+            );
+          })}
         </div>
       </fieldset>
 
@@ -110,22 +108,30 @@ export function SettingsForm({ initial }: { initial: PracticeSettings }) {
         <legend className="text-sm font-medium text-ink-soft">
           Speaking duration
         </legend>
-        <div className="mt-3 flex flex-wrap gap-2">
-          {SPEAKING_OPTIONS.map((option) => (
-            <label key={option}>
-              <input
-                type="radio"
-                name="speakingDurationSeconds"
-                value={option}
-                checked={settings.speakingDurationSeconds === option}
-                onChange={() => setSpeakingDurationSeconds(option)}
-                className="sr-only"
-              />
-              <OptionPill selected={settings.speakingDurationSeconds === option}>
-                {option}s
-              </OptionPill>
-            </label>
-          ))}
+        <div className="mt-3 flex flex-wrap gap-3">
+          {SPEAKING_OPTIONS_MINUTES.map((option) => {
+            const seconds = minutesToSeconds(option);
+            return (
+              <label key={option}>
+                <input
+                  type="radio"
+                  name="speakingDurationSeconds"
+                  value={seconds}
+                  checked={settings.speakingDurationSeconds === seconds}
+                  onChange={() =>
+                    setSettings((previous) => ({
+                      ...previous,
+                      speakingDurationSeconds: seconds,
+                    }))
+                  }
+                  className="sr-only"
+                />
+                <OptionPill selected={settings.speakingDurationSeconds === seconds}>
+                  {option} min
+                </OptionPill>
+              </label>
+            );
+          })}
         </div>
       </fieldset>
 
@@ -133,7 +139,7 @@ export function SettingsForm({ initial }: { initial: PracticeSettings }) {
         <legend className="text-sm font-medium text-ink-soft">
           Categories
         </legend>
-        <div className="mt-3 flex flex-wrap gap-2">
+        <div className="mt-3 flex flex-wrap gap-3">
           {TOPIC_CATEGORIES.map((category) => {
             const selected = settings.selectedCategories.includes(category);
             return (
@@ -159,7 +165,7 @@ export function SettingsForm({ initial }: { initial: PracticeSettings }) {
         <legend className="text-sm font-medium text-ink-soft">
           Difficulty
         </legend>
-        <div className="mt-3 flex flex-wrap gap-2">
+        <div className="mt-3 flex flex-wrap gap-3">
           {TOPIC_DIFFICULTIES.map((difficulty) => {
             const selected = settings.selectedDifficulties.includes(difficulty);
             return (

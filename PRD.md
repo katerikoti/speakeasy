@@ -188,6 +188,7 @@ The speaking duration is configurable.
 
 Initial useful durations should include:
 
+* 0.5 minutes
 * 1 minute
 * 2 minutes
 * 3 minutes
@@ -269,6 +270,8 @@ Registered users should be able to configure:
 Preparation duration
 
 The user can select their preferred preparation duration.
+
+Initial useful durations include 0.5, 1, 2, and 3 minutes.
 
 Speaking duration
 
