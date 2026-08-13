@@ -189,12 +189,10 @@ export function PracticeCalendar() {
                 key={topic.id}
                 className="flex items-start gap-2.5 font-display text-base leading-snug text-ink"
               >
-                {selectedTopics.length > 1 ? (
-                  <span
-                    aria-hidden="true"
-                    className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-almond-silk"
-                  />
-                ) : null}
+                <span
+                  aria-hidden="true"
+                  className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-almond-silk"
+                />
                 <span>{topic.prompt}</span>
               </li>
             ))}
