@@ -25,7 +25,7 @@ Phase 1 — Visual Foundation
 * Create responsive page shell — done
 * Create header/navigation — done (streak pill + sign in for guests, calendar/settings buttons for authenticated users only)
 * Create initial home screen — done
-* Create topic wheel visual component — done (10-segment palette wheel)
+* Create topic wheel visual component — done (30 alternating light/dark neutral slices for a multi-part look)
 * Ensure mobile-first layout — done
 
 Phase 2 — Topic System

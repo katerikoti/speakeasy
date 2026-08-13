@@ -8,12 +8,12 @@ const SEGMENTS = WHEEL_SEGMENTS;
 const VISUAL_SLICES = 30;
 
 const SLICE_COLORS = [
-  "#EDEDE9",
-  "#E3D5CA",
   "#F5EBE0",
+  "#B3A18E",
+  "#E3D5CA",
+  "#9C8976",
   "#D6CCC2",
-  "#D5BDAF",
-  "#CDBFB0",
+  "#C9BAA9",
 ];
 
 const FULL_TURNS = 5;
