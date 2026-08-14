@@ -116,8 +116,8 @@ Phase 8 — Registered User Experience
 
 Phase 9 — PWA
 
-* Add web app manifest
-* Add application icons
+* Add web app manifest — done (src/app/manifest.ts, standalone, parchment theme)
+* Add application icons — in progress (waiting on the logo asset; drop 512px PNG at src/app/icon.png, optional 180px at src/app/apple-icon.png)
 * Configure installable PWA behavior
 * Test mobile installation
 * Test desktop installation

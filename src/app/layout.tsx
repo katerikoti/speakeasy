@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Lora } from "next/font/google";
 import { AuthProvider } from "@/components/AuthProvider";
 import { auth } from "@/auth";
@@ -17,6 +17,10 @@ const lora = Lora({
 export const metadata: Metadata = {
   title: "Speakeasy",
   description: "Daily speaking practice, one spin at a time.",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#EDEDE9",
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
