@@ -10,10 +10,10 @@ export function InstallGuide() {
     <ol className="flex flex-col gap-2">
       {STEPS.map((step, index) => (
         <li key={index} className="flex items-start gap-3 text-sm leading-relaxed">
-          <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-linen text-xs font-semibold text-ink-soft ring-1 ring-bone/60">
+          <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-linen text-xs font-semibold text-ink ring-1 ring-bone/60">
             {index + 1}
           </span>
-          <span className="text-ink-soft">{step}</span>
+          <span className="text-ink">{step}</span>
         </li>
       ))}
     </ol>

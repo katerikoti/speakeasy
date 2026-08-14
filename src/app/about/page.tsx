@@ -84,7 +84,7 @@ export default function AboutPage() {
           className="mx-auto w-full max-w-5xl scroll-mt-24 px-6 py-16"
         >
           <div className="max-w-xl">
-            <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-almond-silk">
+            <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-ink">
               About
             </h2>
             <p className="mt-4 text-base leading-relaxed text-ink md:text-lg">
@@ -99,7 +99,7 @@ export default function AboutPage() {
         <section id="how-it-works" className="scroll-mt-24 py-16">
           <div className="mx-auto w-full max-w-5xl px-6">
             <div className="max-w-xl">
-              <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-almond-silk">
+              <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-ink">
                 How it works
               </h2>
               <div className="mt-6 rounded-3xl bg-white/60 p-6 ring-1 ring-bone/60 md:p-8">
@@ -130,14 +130,14 @@ export default function AboutPage() {
           className="mx-auto w-full max-w-5xl scroll-mt-24 px-6 py-16"
         >
           <div className="max-w-xl">
-            <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-almond-silk">
+            <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-ink">
               Add it to your home screen
             </h2>
             <p className="mt-4 text-base leading-relaxed text-ink md:text-lg">
               Speakeasy is a web app — install it once and it opens like any
               other app.
             </p>
-            <div className="mt-6 rounded-2xl bg-linen p-5 ring-1 ring-bone/60">
+            <div className="mt-6 rounded-3xl bg-white/60 p-6 ring-1 ring-bone/60 md:p-8">
               <InstallGuide />
             </div>
             <p className="mt-10 text-sm leading-relaxed text-ink-soft">
