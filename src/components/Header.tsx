@@ -14,16 +14,18 @@ export function Header({ streak = 0 }: { streak?: number }) {
   return (
     <header className="mx-auto flex w-full max-w-md items-center justify-between px-6 py-5 md:max-w-2xl">
       <div className="flex items-center gap-2">
-        <div
-          className="flex items-center gap-1.5"
-          aria-label={`${streak}-day streak`}
-          title={`${streak}-day streak`}
-        >
-          <StreakIcon className="h-5 w-5 text-ink" />
-          <span className="text-base font-bold tabular-nums text-ink">
-            {streak}
-          </span>
-        </div>
+        {status === "authenticated" ? (
+          <div
+            className="flex items-center gap-1.5"
+            aria-label={`${streak}-day streak`}
+            title={`${streak}-day streak`}
+          >
+            <StreakIcon className="h-5 w-5 text-ink" />
+            <span className="text-base font-bold tabular-nums text-ink">
+              {streak}
+            </span>
+          </div>
+        ) : null}
       </div>
       <div className="flex items-center gap-3">
         {status === "authenticated" && session?.user ? (
