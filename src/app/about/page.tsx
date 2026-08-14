@@ -79,27 +79,26 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section
-          id="about"
-          className="mx-auto w-full max-w-5xl scroll-mt-24 px-6 py-16"
-        >
-          <div className="max-w-xl">
-            <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-ink">
-              About
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-ink md:text-lg">
-              Speakeasy is a simple speaking workout. Each day you spin a wheel,
-              get an unexpected topic, and practice speaking about it out loud
-              — a few minutes of deliberate practice that builds confidence and
-              fluency.
-            </p>
+        <section id="about" className="scroll-mt-24 bg-bone/40 py-16">
+          <div className="mx-auto w-full max-w-5xl px-6">
+            <div className="max-w-xl">
+              <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-ink-soft">
+                About
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-ink md:text-lg">
+                Speakeasy is a simple speaking workout. Each day you spin a
+                wheel, get an unexpected topic, and practice speaking about it
+                out loud — a few minutes of deliberate practice that builds
+                confidence and fluency.
+              </p>
+            </div>
           </div>
         </section>
 
         <section id="how-it-works" className="scroll-mt-24 py-16">
           <div className="mx-auto w-full max-w-5xl px-6">
             <div className="max-w-xl">
-              <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-ink">
+              <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-ink-soft">
                 How it works
               </h2>
               <div className="mt-6 rounded-3xl bg-white/60 p-6 ring-1 ring-bone/60 md:p-8">
@@ -125,26 +124,25 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section
-          id="how-to-install"
-          className="mx-auto w-full max-w-5xl scroll-mt-24 px-6 py-16"
-        >
-          <div className="max-w-xl">
-            <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-ink">
-              Add it to your home screen
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-ink md:text-lg">
-              Speakeasy is a web app — install it once and it opens like any
-              other app.
-            </p>
-            <div className="mt-6 rounded-3xl bg-white/60 p-6 ring-1 ring-bone/60 md:p-8">
-              <InstallGuide />
+        <section id="how-to-install" className="scroll-mt-24 bg-bone/40 py-16">
+          <div className="mx-auto w-full max-w-5xl px-6">
+            <div className="max-w-xl">
+              <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-ink-soft">
+                Add it to your home screen
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-ink md:text-lg">
+                Speakeasy is a web app — install it once and it opens like any
+                other app.
+              </p>
+              <div className="mt-6 rounded-3xl bg-white/60 p-6 ring-1 ring-bone/60 md:p-8">
+                <InstallGuide />
+              </div>
+              <p className="mt-10 text-sm leading-relaxed text-ink-soft">
+                No account needed to start. Practice as a guest, keep your
+                progress on this device, and create an account later to keep
+                your streak and history.
+              </p>
             </div>
-            <p className="mt-10 text-sm leading-relaxed text-ink-soft">
-              No account needed to start. Practice as a guest, keep your
-              progress on this device, and create an account later to keep your
-              streak and history.
-            </p>
           </div>
         </section>
       </main>
