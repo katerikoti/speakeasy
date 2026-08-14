@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+:root {
+  color-scheme: only light;
+}
+
 @theme {
   --color-parchment: #edede9;
   --color-bone: #d6ccc2;

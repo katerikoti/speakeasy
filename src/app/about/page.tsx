@@ -31,7 +31,7 @@ const STEPS = [
 const NAV_LINKS = [
   { href: "#about", label: "About" },
   { href: "#how-it-works", label: "How it works" },
-  { href: "#how-to-install", label: "How to install" },
+  { href: "#how-to-install", label: "Install" },
 ];
 
 export default function AboutPage() {
@@ -40,9 +40,9 @@ export default function AboutPage() {
       <header className="sticky top-0 z-40 border-b border-bone/50 bg-parchment/90 backdrop-blur">
         <nav
           aria-label="Page sections"
-          className="mx-auto flex w-full max-w-5xl items-center justify-between gap-4 px-6 py-4"
+          className="mx-auto flex w-full max-w-5xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-6 py-4"
         >
-          <span className="flex items-center gap-2">
+          <span className="flex shrink-0 items-center gap-2">
             <Image
               src="/logo.png"
               alt="Speakeasy logo"
