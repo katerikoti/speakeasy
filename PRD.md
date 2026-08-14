@@ -228,6 +228,20 @@ Preparation notes are not saved.
 
 The completed practice contributes to the user’s streak and calendar.
 
+5.9 About Page
+
+The application includes a public about page (at /about) that can be shared as a link to introduce new or prospective users.
+
+The about page:
+
+* Explains what the application is in a short paragraph
+* Summarizes the practice flow (Spin, Prepare, Speak, Reflect)
+* Provides a button to open the application
+* Provides device-appropriate instructions for adding the application to the home screen
+* Notes that no account is required to start and that guest progress can be kept with a later registration
+
+The about page is public and does not require authentication.
+
 6. Guest Experience
 
 Guest users can use the full core practice flow without creating an account.
@@ -302,6 +316,8 @@ Guests do not see the calendar.
 The primary purpose is habit tracking.
 
 Completed days show the topic prompts practiced that day, so the calendar doubles as a light practice history.
+
+When a topic has a saved rating, the rating is shown with the topic in the day detail.
 
 A completed day should be visually distinguishable from an uncompleted day.
 

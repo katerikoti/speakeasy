@@ -43,18 +43,19 @@ export function PracticeCalendar() {
       : null,
   );
 
-  const practicesByDay = new Map<string, Topic[]>();
+  const practicesByDay = new Map<string, { topic: Topic; rating: number | null }[]>();
   for (const practice of guestData.practices) {
     const key = localDayKey(new Date(practice.practicedAt));
     const topic = TOPIC_BY_ID.get(practice.topicId);
     if (!topic) {
       continue;
     }
+    const item = { topic, rating: practice.rating };
     const list = practicesByDay.get(key);
     if (list) {
-      list.push(topic);
+      list.push(item);
     } else {
-      practicesByDay.set(key, [topic]);
+      practicesByDay.set(key, [item]);
     }
   }
 
@@ -184,16 +185,35 @@ export function PracticeCalendar() {
             {formatDayKey(selectedKey)}
           </p>
           <ul className="mt-3 flex flex-col gap-2.5">
-            {selectedTopics.map((topic) => (
+            {selectedTopics.map(({ topic, rating }) => (
               <li
                 key={topic.id}
-                className="flex items-start gap-2.5 font-display text-base leading-snug text-ink"
+                className="flex items-start gap-2.5"
               >
                 <span
                   aria-hidden="true"
                   className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-almond-silk"
                 />
-                <span>{topic.prompt}</span>
+                <span className="min-w-0">
+                  <span className="block font-display text-base leading-snug text-ink">
+                    {topic.prompt}
+                  </span>
+                  {rating !== null ? (
+                    <span
+                      className="mt-1.5 flex items-center gap-1"
+                      aria-label={`Rated ${rating} of 5`}
+                    >
+                      {Array.from({ length: 5 }, (_, index) => (
+                        <span
+                          key={index}
+                          className={`h-1.5 w-1.5 rounded-full ${
+                            index < rating ? "bg-almond-silk" : "bg-bone"
+                          }`}
+                        />
+                      ))}
+                    </span>
+                  ) : null}
+                </span>
               </li>
             ))}
           </ul>
