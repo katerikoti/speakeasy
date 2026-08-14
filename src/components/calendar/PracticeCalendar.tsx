@@ -5,7 +5,7 @@ import type { GuestPractice } from "@/lib/guestStorage";
 import { localDayKey, longestStreak } from "@/lib/streak";
 import { TOPICS, type Topic } from "@/lib/topics";
 
-const WEEKDAY_LABELS = ["S", "M", "T", "W", "T", "F", "S"];
+const WEEKDAY_LABELS = ["M", "T", "W", "T", "F", "S", "S"];
 
 const TOPIC_BY_ID = new Map<string, Topic>(
   TOPICS.map((topic) => [topic.id, topic]),
@@ -62,7 +62,7 @@ export function PracticeCalendar({ practices }: { practices: GuestPractice[] }) 
 
   const year = month.getFullYear();
   const monthIndex = month.getMonth();
-  const firstWeekday = new Date(year, monthIndex, 1).getDay();
+  const firstWeekday = (new Date(year, monthIndex, 1).getDay() + 6) % 7;
   const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
 
   const longest = longestStreak(

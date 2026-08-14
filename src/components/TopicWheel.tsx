@@ -28,7 +28,7 @@ function WheelPointer() {
       fill="none"
     >
       <path
-        d="M12 0 23 20H1Z"
+        d="M12 20 1 0h22Z"
         fill="#D5BDAF"
         stroke="#3F3A33"
         strokeWidth="1.5"

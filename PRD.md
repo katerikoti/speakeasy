@@ -310,6 +310,8 @@ Settings should have sensible defaults so users can begin immediately without co
 
 The calendar shows which days the user completed at least one practice.
 
+The week starts on Monday.
+
 Selecting a completed day shows the topics practiced on that day.
 
 The calendar is available to registered users only.
