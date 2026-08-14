@@ -96,32 +96,31 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section
-          id="how-it-works"
-          className="scroll-mt-24 bg-linen py-16"
-        >
+        <section id="how-it-works" className="scroll-mt-24 py-16">
           <div className="mx-auto w-full max-w-5xl px-6">
             <div className="max-w-xl">
               <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-almond-silk">
                 How it works
               </h2>
-              <ol className="mt-6 flex flex-col gap-5">
-                {STEPS.map((step, index) => (
-                  <li key={step.title} className="flex items-start gap-4">
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-parchment font-display text-base font-medium text-ink ring-1 ring-bone/60">
-                      {index + 1}
-                    </span>
-                    <span className="flex flex-col gap-1">
-                      <span className="text-sm font-semibold text-ink">
-                        {step.title}
+              <div className="mt-6 rounded-3xl bg-white/60 p-6 ring-1 ring-bone/60 md:p-8">
+                <ol className="flex flex-col gap-5">
+                  {STEPS.map((step, index) => (
+                    <li key={step.title} className="flex items-start gap-4">
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-linen font-display text-base font-medium text-ink ring-1 ring-bone/60">
+                        {index + 1}
                       </span>
-                      <span className="text-sm leading-relaxed text-ink-soft">
-                        {step.text}
+                      <span className="flex flex-col gap-1">
+                        <span className="text-sm font-semibold text-ink">
+                          {step.title}
+                        </span>
+                        <span className="text-sm leading-relaxed text-ink">
+                          {step.text}
+                        </span>
                       </span>
-                    </span>
-                  </li>
-                ))}
-              </ol>
+                    </li>
+                  ))}
+                </ol>
+              </div>
             </div>
           </div>
         </section>
