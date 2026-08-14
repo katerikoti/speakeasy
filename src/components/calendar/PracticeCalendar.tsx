@@ -209,7 +209,7 @@ export function PracticeCalendar({ practices }: { practices: GuestPractice[] }) 
                           aria-hidden="true"
                           className={`h-4 w-4 ${
                             index < rating
-                              ? "fill-almond-silk text-almond-silk"
+                              ? "fill-[#B3A18E] text-[#B3A18E]"
                               : "fill-none stroke-almond-silk"
                           }`}
                         >
