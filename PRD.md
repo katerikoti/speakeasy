@@ -252,7 +252,9 @@ Guest users can use the full core practice flow without creating an account.
 
 Guest data is stored locally.
 
-Guest users should be able to see their current practice progress (such as their streak) during the current device/session.
+Guest users should be able to see their current practice progress during the current device/session.
+
+The streak is displayed to registered users only. Guests do not see the streak.
 
 Calendar and settings are registered-user features. Guests do not see the calendar or settings.
 
