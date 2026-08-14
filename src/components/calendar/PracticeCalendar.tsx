@@ -204,12 +204,22 @@ export function PracticeCalendar() {
                       aria-label={`Rated ${rating} of 5`}
                     >
                       {Array.from({ length: 5 }, (_, index) => (
-                        <span
+                        <svg
                           key={index}
-                          className={`h-1.5 w-1.5 rounded-full ${
-                            index < rating ? "bg-almond-silk" : "bg-bone"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                          className={`h-4 w-4 ${
+                            index < rating
+                              ? "fill-ink text-ink"
+                              : "fill-none stroke-almond-silk"
                           }`}
-                        />
+                        >
+                          <path
+                            d="m12 2.8 2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17l-5.6 3 1.1-6.2-4.6-4.4 6.3-.9z"
+                            strokeLinejoin="round"
+                            strokeLinecap="round"
+                          />
+                        </svg>
                       ))}
                     </span>
                   ) : null}
