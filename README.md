@@ -1,134 +1,70 @@
-Speakeasy
+# Speakeasy
 
-Speakeasy is a web app for practicing speaking skills through short, structured daily speaking exercises.
+A speaking-practice PWA. Spin the wheel, get an unexpected topic, prepare, speak out loud for a timed session, and rate how it felt. Built to make speaking practice simple enough to do every day.
 
-The user receives a random speaking topic, gets a configurable amount of preparation time, makes optional notes, and then speaks about the topic for a configurable amount of time. After finishing, they rate how the practice felt.
+## Tech stack
 
-The app is designed to make speaking practice simple enough to do every day.
+- **Next.js 16** (App Router, React 19) + TypeScript
+- **Tailwind CSS v4**
+- **Prisma 7** with the **Neon** serverless driver adapter
+- **PostgreSQL** on [Neon](https://neon.tech) (free tier)
+- **Auth.js v5** (credentials) with bcrypt password hashing
 
-Core Flow
+## Features
 
-Spin → Prepare → Speak → Reflect → Done
+- Topic wheel with unused-topic-first selection and pool reset
+- Guest mode — practice without an account, progress stored on the device
+- Registration, login, and guest-to-account migration
+- Preparation, countdown, and speaking timers with early start/finish
+- Optional preparation notes
+- Self-rating
+- Streak and practice calendar for registered users
+- Configurable settings (durations, topic categories, difficulty)
+- PWA manifest and app icons; `/about` landing page
 
-1. The user opens Speakeasy.
-2. The user spins the topic wheel.
-3. Speakeasy selects a random unused topic.
-4. The user gets preparation time and can make optional notes.
-5. The user starts speaking when ready.
-6. A speaking timer runs for the configured duration.
-7. The user can finish speaking early.
-8. The user gives themselves a simple rating.
-9. The practice is recorded as completed.
-10. The user’s streak and calendar update.
+## Getting started
 
-Guest Mode
+Requires Node.js 20+ and a PostgreSQL database (a free [Neon](https://neon.tech) project works).
 
-Speakeasy can be used without registration.
+```bash
+npm install
+cp .env.example .env   # then fill in DATABASE_URL and AUTH_SECRET
+npm run db:migrate     # applies the Prisma migrations
+npm run dev            # http://localhost:3000
+```
 
-Guest users can complete practices normally. Their practice progress is stored locally on the device.
+Environment variables:
 
-After completing a practice, guests may be encouraged to create an account so their progress can be saved permanently and synchronized across devices.
+| Variable       | Purpose                                        |
+| -------------- | ---------------------------------------------- |
+| `DATABASE_URL` | PostgreSQL connection string (Neon free tier)  |
+| `AUTH_SECRET`  | Session signing secret — `openssl rand -base64 32` |
 
-When a guest creates an account, their existing local practice history and progress should be migrated to their new account.
+## Scripts
 
-Registered Users
+| Script            | Description                          |
+| ----------------- | ------------------------------------ |
+| `npm run dev`     | Start the dev server                 |
+| `npm run build`   | Production build                     |
+| `npm run start`   | Run the production build             |
+| `npm run lint`    | Lint                                 |
+| `npm run db:migrate` | Create/apply migrations          |
+| `npm run db:deploy`  | Apply migrations in production   |
+| `npm run db:studio`  | Open Prisma Studio                |
 
-Registered users can:
+## Deploying
 
-* Keep their practice history
-* Maintain their streak across devices
-* View their practice calendar
-* Configure preparation duration
-* Configure speaking duration
-* Select preferred topic categories
-* Configure other available practice preferences
+Deploys to **Vercel** (free Hobby plan) from the GitHub repository on every push to `main`.
 
-Topics
+1. Create a database at [neon.tech](https://neon.tech) and copy its connection string.
+2. Push the schema: `DATABASE_URL="<url>" npm run db:deploy` (or `npx prisma db push`).
+3. Import the repo at [vercel.com](https://vercel.com) and add these environment variables:
+   - `DATABASE_URL` — the Neon connection string
+   - `AUTH_SECRET` — a fresh value from `openssl rand -base64 32`
+4. Deploy.
 
-Speakeasy contains a large collection of speaking topics covering many areas of life.
+Guests can use the app with no database at all; registration, streak, and calendar require the database.
 
-Topics should be:
+## Documentation
 
-* Accessible without specialist knowledge
-* Interesting enough to require thought
-* Open-ended enough to support extended speaking
-* Suitable for speaking practice rather than one-word answers
-
-Topic categories include areas such as:
-
-* Everyday Life
-* Personal
-* Opinions
-* Society
-* Technology
-* Work & Career
-* Communication
-* Relationships
-* Travel & Culture
-* Creativity
-* Hypothetical
-* Situational
-* Fun & Random
-
-Topics may also have difficulty levels.
-
-Topic Selection Rule
-
-Speakeasy should prioritize topics the user has not previously completed.
-
-The wheel still visually spins every time, but the selected topic should come from the user’s unused topic pool.
-
-When the user has completed every available topic in their current pool, the pool resets and previously completed topics may begin appearing again.
-
-Design Direction
-
-The visual style should be:
-
-* Warm
-* Elegant
-* Calm
-* Minimal
-* Slightly playful
-
-The primary visual direction uses warm beige and neutral tones.
-
-Suggested palette:
-
-* Parchment — #EDEDE9
-* Bone — #D6CCC2
-* Linen — #F5EBE0
-* Almond Cream — #E3D5CA
-* Almond Silk — #D5BDAF
-
-The wheel may use different shades from this same palette to visually separate its sections.
-
-Avoid introducing a rainbow or unrelated bright color palette.
-
-V1 Goals
-
-V1 should provide a complete, usable speaking-practice experience including:
-
-* Guest mode
-* User registration and login
-* Topic wheel
-* Large topic collection
-* Topic categories
-* Topic difficulty
-* Preparation timer
-* Optional preparation notes
-* Speaking timer
-* Early start and early finish controls
-* Self-rating
-* Practice streak
-* Practice calendar
-* User settings
-* Guest-to-account progress migration
-* PWA functionality
-
-Development Philosophy
-
-Speakeasy should remain simple and focused.
-
-The application should prioritize the quality of the core speaking-practice experience over adding large numbers of secondary features.
-
-Product decisions should be documented in the project documentation so that the documentation remains the source of truth throughout development.
+[PRD.md](PRD.md), [ARCHITECTURE.md](ARCHITECTURE.md), and [PLAN.md](PLAN.md) are the source of truth for product requirements and technical decisions.
