@@ -77,7 +77,7 @@ export function RegisterForm() {
           autoComplete="name"
           maxLength={60}
           className="w-full rounded-2xl border border-almond-silk bg-white/60 px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink-soft/60 focus:border-almond-silk focus:bg-white"
-          placeholder="How should we call you?"
+          placeholder="What should we call you?"
         />
       </div>
       <div>
