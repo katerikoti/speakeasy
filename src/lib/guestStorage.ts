@@ -85,3 +85,15 @@ export function addGuestPractice(practice: GuestPractice): GuestData {
 export function completedTopicIdsFrom(data: GuestData): Set<string> {
   return new Set(data.practices.map((practice) => practice.topicId));
 }
+
+/** Returns the most recently completed guest practice, or null when empty. */
+export function latestGuestPractice(): GuestPractice | null {
+  const data = loadGuestData();
+  let latest: GuestPractice | null = null;
+  for (const practice of data.practices) {
+    if (latest === null || practice.practicedAt > latest.practicedAt) {
+      latest = practice;
+    }
+  }
+  return latest;
+}

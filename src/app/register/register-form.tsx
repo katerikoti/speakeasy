@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { migrateLatestPracticeAction } from "@/app/actions";
+import { latestGuestPractice } from "@/lib/guestStorage";
 
 export function RegisterForm() {
   const router = useRouter();
@@ -47,6 +49,17 @@ export function RegisterForm() {
       router.push("/login");
       return;
     }
+
+    const latest = latestGuestPractice();
+    if (latest) {
+      await migrateLatestPracticeAction({
+        id: latest.id,
+        topicId: latest.topicId,
+        practicedAt: latest.practicedAt,
+        rating: latest.rating,
+      });
+    }
+
     router.push("/");
     router.refresh();
   }

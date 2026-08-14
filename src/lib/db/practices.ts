@@ -41,10 +41,11 @@ export function upsertPractice({
   userId,
   topicId,
   rating,
-}: PracticeInput & { id: string }) {
+  practicedAt,
+}: PracticeInput & { id: string; practicedAt?: Date }) {
   return prisma.practice.upsert({
     where: { id },
-    create: { id, userId, topicId, rating },
+    create: { id, userId, topicId, rating, practicedAt },
     update: {},
   });
 }

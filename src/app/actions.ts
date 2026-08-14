@@ -92,3 +92,51 @@ export async function savePracticeAction(input: {
   revalidatePath("/calendar");
   return { ok: true };
 }
+
+export async function migrateLatestPracticeAction(input: {
+  id: string;
+  topicId: string;
+  practicedAt: string;
+  rating: number | null;
+}): Promise<{ ok: boolean }> {
+  const session = await auth();
+  const userId = session?.user?.id;
+  if (!userId) {
+    return { ok: false };
+  }
+  if (
+    typeof input.id !== "string" ||
+    input.id.length === 0 ||
+    typeof input.topicId !== "string"
+  ) {
+    return { ok: false };
+  }
+  const practicedAt = new Date(input.practicedAt);
+  if (Number.isNaN(practicedAt.getTime())) {
+    return { ok: false };
+  }
+  if (
+    input.rating !== null &&
+    (!Number.isInteger(input.rating) || input.rating < 1 || input.rating > 5)
+  ) {
+    return { ok: false };
+  }
+
+  const topicExists = await prisma.topic.findUnique({
+    where: { id: input.topicId },
+    select: { id: true },
+  });
+  if (!topicExists) {
+    return { ok: false };
+  }
+
+  await upsertPractice({
+    id: input.id,
+    userId,
+    topicId: input.topicId,
+    rating: input.rating,
+    practicedAt,
+  });
+  revalidatePath("/calendar");
+  return { ok: true };
+}

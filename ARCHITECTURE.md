@@ -86,19 +86,11 @@ Guest local data must be designed so it can later be migrated to the registered 
 
 6. Guest Migration
 
-After successful registration:
+When a guest registers, only their most recently completed practice is transferred to the account.
 
-1. Read guest data.
-2. Validate it.
-3. Send eligible practice data to the server.
-4. Associate practices with the new user.
-5. Avoid duplicate records.
-6. Apply relevant settings.
-7. Clear migrated local data.
+Migration runs from the registration form after the new session is established. The client reads the latest guest practice from local storage and submits it to the `migrateLatestPracticeAction` server action, which derives the user from the authenticated session, validates the topic id, rating, and date server-side, and upserts the practice idempotently. Older guest practices are intentionally not migrated.
 
-The migration process should be idempotent where practical.
-
-If migration is interrupted, retrying should not create duplicate practice records.
+The migration process is idempotent: re-running it never creates duplicate practice records.
 
 7. Data Model
 

@@ -268,18 +268,19 @@ Registration should never be required before the first practice.
 
 7. Guest-to-Account Migration
 
+Only the guest's most recent practice is carried over to their account when they register.
+
 When a guest creates an account:
 
 1. Read the locally stored guest practice history.
-2. Create the user’s account.
-3. Transfer valid guest practices to the user’s account.
-4. Transfer relevant progress/settings.
-5. Clear or mark the migrated guest data as migrated.
-6. Display the user’s existing streak/history.
+2. Create the user's account.
+3. Transfer only the most recently completed guest practice to the user's account.
+4. Ignore all older guest practices; they are not migrated.
+5. Display the user's history/streak based on the transferred practice.
 
-A guest who completed one practice before registering should therefore have that practice count toward their account history and streak.
+A guest who completed one practice before registering should therefore have that practice count toward their account history and streak. A guest with several past practices keeps their local guest history on the device, but only the latest practice appears in the account.
 
-Migration must avoid creating duplicate practices.
+Migration must be idempotent and avoid creating duplicate practices.
 
 8. Registered User Settings
 

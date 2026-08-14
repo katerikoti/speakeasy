@@ -93,12 +93,9 @@ Phase 6 — Authentication
 
 Phase 7 — Guest-to-Account Migration
 
-* Define migration payload
-* Validate guest data server-side
-* Transfer guest practices
-* Transfer relevant settings
-* Prevent duplicate practices
-* Clear migrated guest data
+* Transfer only the latest guest practice — done (migrateLatestPracticeAction, runs from the registration form after sign-in; server-validated, idempotent upsert)
+* Transfer relevant settings — removed (settings defaults are used for new accounts)
+* Prevent duplicate practices — done (upsert by practice id)
 * Test registration after one completed practice
 * Test registration after multiple completed practices
 * Test interrupted/repeated migration
