@@ -41,8 +41,17 @@ export default function AboutPage() {
           aria-label="Page sections"
           className="mx-auto flex w-full max-w-5xl items-center justify-between gap-4 px-6 py-4"
         >
-          <span className="font-display text-lg font-medium text-ink">
-            Speakeasy
+          <span className="flex items-center gap-2">
+            <img
+              src="/logo.png"
+              alt="Speakeasy logo"
+              width={28}
+              height={28}
+              className="h-7 w-7"
+            />
+            <span className="font-display text-lg font-medium text-ink">
+              Speakeasy
+            </span>
           </span>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-sm font-medium text-ink-soft">
             {NAV_LINKS.map((link) => (
@@ -148,13 +157,30 @@ export default function AboutPage() {
       </main>
 
       <footer className="border-t border-bone/50 py-10">
-        <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-2 px-6 text-center">
-          <span className="font-display text-lg font-medium text-ink">
-            Speakeasy
+        <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-3 px-6 text-center">
+          <span className="flex items-center gap-2">
+            <img
+              src="/logo.png"
+              alt="Speakeasy logo"
+              width={28}
+              height={28}
+              className="h-7 w-7"
+            />
+            <span className="font-display text-lg font-medium text-ink">
+              Speakeasy
+            </span>
           </span>
           <p className="text-sm text-ink-soft">
             Daily speaking practice, one spin at a time.
           </p>
+          <a
+            href="https://www.katerinamaenpaa.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-ink-soft underline underline-offset-4 transition-colors hover:text-ink"
+          >
+            Made by www.katerinamaenpaa.dev
+          </a>
         </div>
       </footer>
     </div>
