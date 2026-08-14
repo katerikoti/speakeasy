@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 const STEPS = [
   {
     title: "Spin",
-    text: "A random topic from your unused pool.",
+    text: "You get a random topic to speak about.",
   },
   {
     title: "Prepare",
@@ -86,8 +86,7 @@ export default function AboutPage() {
       </section>
 
       <p className="mt-10 text-sm leading-relaxed text-ink-soft">
-        No account needed to start. Practice as a guest, keep your progress on
-        this device, and create an account later to keep your streak and history.
+        No account needed to start. You can practise as a guest and create an account later if you want to keep your streak and history.
       </p>
     </div>
   );
