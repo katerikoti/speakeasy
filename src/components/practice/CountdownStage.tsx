@@ -8,7 +8,7 @@ export function CountdownStage({
   const display = Math.max(1, Math.ceil(remainingSeconds));
 
   return (
-    <section className="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-center gap-5 px-6 md:max-w-2xl">
+    <section className="mx-auto flex w-full max-w-md flex-1 flex-col items-center gap-8 px-6 py-10 md:max-w-2xl">
       <p className="text-sm font-medium uppercase tracking-[0.2em] text-almond-silk">
         Get ready to speak
       </p>
