@@ -2,6 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import { useState } from "react";
+import { savePracticeAction } from "@/app/actions";
 import { Header } from "@/components/Header";
 import { SignUpPromptModal } from "@/components/practice/SignUpPromptModal";
 import { TopicCard } from "@/components/TopicCard";
@@ -12,30 +13,62 @@ import { PreparationStage } from "@/components/practice/PreparationStage";
 import { ReflectionStage } from "@/components/practice/ReflectionStage";
 import { SpeakingStage } from "@/components/practice/SpeakingStage";
 import { usePracticeSession } from "@/components/practice/usePracticeSession";
-import { completedTopicIdsFrom, loadGuestData } from "@/lib/guestStorage";
+import {
+  addGuestPractice,
+  completedTopicIdsFrom,
+  type GuestPractice,
+} from "@/lib/guestStorage";
 import type { PracticeSettings } from "@/lib/settings";
 import { currentStreak } from "@/lib/streak";
 import { TOPICS } from "@/lib/topics";
 import { segmentIndexForTopic, selectTopic } from "@/lib/topicSelection";
 import { useGuestData } from "@/lib/useGuestData";
 
-export function HomeClient({ settings }: { settings: PracticeSettings }) {
+export function HomeClient({
+  settings,
+  initialPractices = [],
+}: {
+  settings: PracticeSettings;
+  initialPractices?: GuestPractice[];
+}) {
   const session = usePracticeSession(settings);
   const guestData = useGuestData();
+  const { status } = useSession();
+  const [accountPractices, setAccountPractices] =
+    useState<GuestPractice[]>(initialPractices);
   const [spinInProgress, setSpinInProgress] = useState(false);
   const [wheelOpen, setWheelOpen] = useState(true);
   const [signUpPromptDismissed, setSignUpPromptDismissed] = useState(false);
-  const { status } = useSession();
+
+  const isAuthenticated = status === "authenticated";
+  const practices = isAuthenticated ? accountPractices : guestData.practices;
 
   const streak = currentStreak(
-    guestData.practices.map((practice) => practice.practicedAt),
+    practices.map((practice) => practice.practicedAt),
   );
 
+  function handlePersistPractice(practice: GuestPractice) {
+    if (isAuthenticated) {
+      setAccountPractices((previous) => [...previous, practice]);
+      void savePracticeAction({
+        id: practice.id,
+        topicId: practice.topicId,
+        rating: practice.rating,
+      });
+    } else {
+      addGuestPractice(practice);
+    }
+  }
+
   function handleSpin(): number {
-    const topic = selectTopic(TOPICS, completedTopicIdsFrom(loadGuestData()), {
-      categories: settings.selectedCategories,
-      difficulties: settings.selectedDifficulties,
-    });
+    const topic = selectTopic(
+      TOPICS,
+      completedTopicIdsFrom({ version: 1, practices }),
+      {
+        categories: settings.selectedCategories,
+        difficulties: settings.selectedDifficulties,
+      },
+    );
     if (!topic) {
       return 0;
     }
@@ -52,7 +85,7 @@ export function HomeClient({ settings }: { settings: PracticeSettings }) {
   const { stage, topic } = session;
 
   const showSignUpPrompt =
-    status !== "authenticated" &&
+    !isAuthenticated &&
     !signUpPromptDismissed &&
     guestData.practices.length === 1;
 
@@ -101,7 +134,7 @@ export function HomeClient({ settings }: { settings: PracticeSettings }) {
         <ReflectionStage
           rating={session.rating}
           onRate={session.setRating}
-          onComplete={session.complete}
+          onComplete={() => session.complete(handlePersistPractice)}
         />
       </div>
     );
@@ -114,6 +147,7 @@ export function HomeClient({ settings }: { settings: PracticeSettings }) {
         <CompletedStage
           topic={topic}
           rating={session.rating}
+          isGuest={!isAuthenticated}
           onPracticeAgain={handlePracticeAgain}
         />
         {showSignUpPrompt ? (
@@ -128,8 +162,8 @@ export function HomeClient({ settings }: { settings: PracticeSettings }) {
   return (
     <div className="flex min-h-dvh flex-col">
       <Header streak={streak} />
-      <main className="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-center gap-10 px-6 pb-16">
-        <h1 className="text-center font-display text-3xl font-medium text-ink">
+      <main className="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-center gap-10 px-6 pb-16 md:max-w-2xl">
+        <h1 className="text-center font-display text-3xl font-medium text-ink md:text-4xl">
           What will you talk about today?
         </h1>
         {wheelOpen ? (

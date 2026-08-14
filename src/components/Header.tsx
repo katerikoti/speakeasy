@@ -12,7 +12,7 @@ export function Header({ streak = 0 }: { streak?: number }) {
     "Account";
 
   return (
-    <header className="mx-auto flex w-full max-w-md items-center justify-between px-6 py-5">
+    <header className="mx-auto flex w-full max-w-md items-center justify-between px-6 py-5 md:max-w-2xl">
       <div className="flex items-center gap-2">
         <div
           className="flex items-center gap-1.5"

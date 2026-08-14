@@ -22,7 +22,7 @@ Phase 1 — Visual Foundation
 * Establish Speakeasy visual identity — done
 * Add warm neutral color palette — done
 * Establish typography — done (Geist sans + Lora display)
-* Create responsive page shell — done
+* Create responsive page shell — done (mobile-first; containers widen to md:max-w-2xl with larger headings on desktop)
 * Create header/navigation — done (streak + sign in for guests; name text, sign-out icon, calendar/settings links for authenticated users only)
 * Create initial home screen — done
 * Create topic wheel visual component — done (30 alternating light/dark neutral slices for a multi-part look)
@@ -105,12 +105,12 @@ Phase 7 — Guest-to-Account Migration
 
 Phase 8 — Registered User Experience
 
-* Load registered user’s practice history
-* Store completed practices in database
-* Implement registered-user topic filtering
-* Implement registered-user topic repetition reset
-* Calculate registered streak
-* Implement practice calendar — done (header + route restricted to authenticated users; completed days show the topics practiced with saved ratings)
+* Load registered user’s practice history — done (home route reads DB practices server-side and passes them to HomeClient)
+* Store completed practices in database — done (savePracticeAction, server-validated, idempotent upsert; completed stage says "saved to your account")
+* Implement registered-user topic filtering — done (completed topic set comes from account history)
+* Implement registered-user topic repetition reset — done (topicSelection resets pool from account history)
+* Calculate registered streak — done (currentStreak over account practice dates)
+* Implement practice calendar — done (server-rendered from DB practice history; completed days show the topics practiced with saved ratings)
 * Implement settings — done (/settings page, updateSettingsAction server action, server-validated)
 * Implement preparation duration setting — done (0.5/1/2/3 minutes, persisted in UserSettings, fed into the practice flow)
 * Implement speaking duration setting — done (0.5/1/2/3/5 minutes, persisted in UserSettings, fed into the practice flow)

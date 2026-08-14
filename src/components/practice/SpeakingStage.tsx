@@ -15,7 +15,7 @@ export function SpeakingStage({
   onFinishEarly: () => void;
 }) {
   return (
-    <section className="mx-auto flex w-full max-w-md flex-1 flex-col items-center gap-8 px-6 py-10">
+    <section className="mx-auto flex w-full max-w-md flex-1 flex-col items-center gap-8 px-6 py-10 md:max-w-2xl">
       <div className="flex flex-col items-center gap-1">
         <p className="text-xs font-medium uppercase tracking-[0.2em] text-almond-silk">
           Speak about

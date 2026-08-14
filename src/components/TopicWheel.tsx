@@ -95,7 +95,7 @@ export function TopicWheel({
   }).join(", ");
 
   return (
-    <div className="relative h-72 w-72 sm:h-80 sm:w-80">
+    <div className="relative h-72 w-72 sm:h-80 sm:w-80 md:h-96 md:w-96">
       <div className="pointer-events-none absolute -top-2 left-1/2 z-20 -translate-x-1/2">
         <WheelPointer />
       </div>

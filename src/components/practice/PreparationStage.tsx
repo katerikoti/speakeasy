@@ -17,7 +17,7 @@ export function PreparationStage({
   onStartSpeaking: () => void;
 }) {
   return (
-    <section className="mx-auto flex w-full max-w-md flex-1 flex-col items-center gap-8 px-6 py-10">
+    <section className="mx-auto flex w-full max-w-md flex-1 flex-col items-center gap-8 px-6 py-10 md:max-w-2xl">
       <p className="text-center font-display text-xl leading-snug text-ink">
         {topic.prompt}
       </p>

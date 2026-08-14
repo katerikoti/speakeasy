@@ -5,14 +5,16 @@ import type { Topic } from "@/lib/topics";
 export function CompletedStage({
   topic,
   rating,
+  isGuest,
   onPracticeAgain,
 }: {
   topic: Topic;
   rating: number | null;
+  isGuest: boolean;
   onPracticeAgain: () => void;
 }) {
   return (
-    <section className="mx-auto flex w-full max-w-md flex-1 flex-col items-center gap-6 px-6 py-10">
+    <section className="mx-auto flex w-full max-w-md flex-1 flex-col items-center gap-6 px-6 py-10 md:max-w-2xl">
       <div className="flex h-16 w-16 items-center justify-center rounded-full bg-almond-silk shadow-sm">
         <svg
           viewBox="0 0 24 24"
@@ -46,7 +48,9 @@ export function CompletedStage({
       </div>
 
       <p className="text-xs text-ink-soft">
-        This practice is saved on this device.
+        {isGuest
+          ? "This practice is saved on this device."
+          : "This practice is saved to your account."}
       </p>
 
       <button

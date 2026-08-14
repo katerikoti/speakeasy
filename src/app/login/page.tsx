@@ -10,8 +10,8 @@ export default async function LoginPage() {
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center px-6 py-10">
-      <h1 className="font-lora text-3xl font-medium text-ink">
+    <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center px-6 py-10 md:max-w-2xl">
+      <h1 className="font-lora text-3xl font-medium text-ink md:text-4xl">
         Welcome back
       </h1>
       <p className="mt-2 text-sm text-ink-soft">

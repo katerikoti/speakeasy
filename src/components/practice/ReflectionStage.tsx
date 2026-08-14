@@ -12,7 +12,7 @@ export function ReflectionStage({
   onComplete: () => void;
 }) {
   return (
-    <section className="mx-auto flex w-full max-w-md flex-1 flex-col items-center gap-10 px-6 py-10">
+    <section className="mx-auto flex w-full max-w-md flex-1 flex-col items-center gap-10 px-6 py-10 md:max-w-2xl">
       <div className="flex flex-col items-center gap-3">
         <p className="text-xs font-medium uppercase tracking-[0.2em] text-almond-silk">
           Reflection

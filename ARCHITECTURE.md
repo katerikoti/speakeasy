@@ -191,9 +191,9 @@ Guests do not see the calendar or settings in the header.
 
 The `/calendar` route is protected with `requireUserId` and redirects guests to `/login`.
 
-The calendar should use practice dates to determine completed days.
+The calendar page is server-rendered: it reads the authenticated user's practices from the database and passes them to the client `PracticeCalendar`, which uses practice dates to determine completed days.
 
-Selecting a completed day shows the topics practiced on that day.
+Selecting a completed day shows the topics practiced on that day, including each practice's saved rating when one was given.
 
 Multiple practices on the same date count as one completed day for streak purposes.
 
@@ -258,6 +258,8 @@ The application should provide:
 * Appropriate viewport configuration
 * Service worker functionality where appropriate
 
+Layout is mobile-first: content containers use a narrow `max-w-md` width on small screens and widen to `max-w-2xl` on desktop, with slightly larger display text, so the interface uses the available space on larger screens while remaining compact on phones.
+
 Offline support should be limited to what can be reliably supported without making the architecture unnecessarily complex.
 
 Guest practice should remain usable without requiring an account.
@@ -302,6 +304,10 @@ Server-side functionality should handle:
 * Practice history retrieval
 * Guest migration
 * Topic data where appropriate
+
+Practice persistence for registered users is handled by the `savePracticeAction` server action (`src/app/actions.ts`), which derives the user from the authenticated session, validates the topic id and rating server-side, and upserts the practice idempotently. Completed practices are written to the database, and the home route reads the user's practice history server-side so streak, topic selection, and the calendar are all backed by the account rather than local storage.
+
+The home route (`src/app/page.tsx`) reads the current user's settings and practice history and passes them to the client `HomeClient`; guests receive defaults and empty history and keep using local storage.
 
 User settings are managed through a `/settings` page (server-rendered, protected by `requireUserId`). The settings form posts to the `updateSettingsAction` server action (`src/app/actions.ts`), which validates input server-side against the allowed duration options and the valid category/difficulty lists, persists the `UserSettings` row, and revalidates the route.
 

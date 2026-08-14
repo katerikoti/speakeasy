@@ -4,7 +4,7 @@ export function TopicCard({ topic }: { topic: Topic }) {
   return (
     <section
       aria-live="polite"
-      className="w-full max-w-md rounded-3xl bg-linen p-6 text-center shadow-[0_10px_30px_rgba(63,58,51,0.12)] ring-1 ring-bone/60"
+      className="w-full max-w-md rounded-3xl bg-linen p-6 text-center shadow-[0_10px_30px_rgba(63,58,51,0.12)] ring-1 ring-bone/60 md:max-w-2xl"
     >
       <p className="text-sm font-medium uppercase tracking-widest text-almond-silk">
         Your topic

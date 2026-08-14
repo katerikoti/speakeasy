@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { addGuestPractice } from "@/lib/guestStorage";
+import type { GuestPractice } from "@/lib/guestStorage";
 import { DEFAULT_SETTINGS, type PracticeSettings } from "@/lib/settings";
 import type { Topic } from "@/lib/topics";
 
@@ -145,21 +145,24 @@ export function usePracticeSession(settings: PracticeSettings = DEFAULT_SETTINGS
     setStage("preparing");
   }, [settings.preparationDurationSeconds]);
 
-  const complete = useCallback(() => {
-    if (topic === null) {
-      return;
-    }
-    const id = crypto.randomUUID();
-    addGuestPractice({
-      id,
-      topicId: topic.id,
-      practicedAt: new Date().toISOString(),
-      rating,
-    });
-    setCompletedPracticeId(id);
-    setNotes("");
-    setStage("completed");
-  }, [topic, rating]);
+  const complete = useCallback(
+    (onPersist: (practice: GuestPractice) => void) => {
+      if (topic === null) {
+        return;
+      }
+      const id = crypto.randomUUID();
+      onPersist({
+        id,
+        topicId: topic.id,
+        practicedAt: new Date().toISOString(),
+        rating,
+      });
+      setCompletedPracticeId(id);
+      setNotes("");
+      setStage("completed");
+    },
+    [topic, rating],
+  );
 
   const reset = useCallback(() => {
     setStage("idle");

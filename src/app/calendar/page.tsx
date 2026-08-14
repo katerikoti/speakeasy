@@ -1,13 +1,22 @@
 import Link from "next/link";
 import { PracticeCalendar } from "@/components/calendar/PracticeCalendar";
+import { getPracticesForUser } from "@/lib/db/practices";
+import type { GuestPractice } from "@/lib/guestStorage";
 import { requireUserId } from "@/lib/session";
 
 export default async function CalendarPage() {
-  await requireUserId();
+  const userId = await requireUserId();
+  const practices = await getPracticesForUser(userId);
+  const initialPractices: GuestPractice[] = practices.map((practice) => ({
+    id: practice.id,
+    topicId: practice.topicId,
+    practicedAt: practice.practicedAt.toISOString(),
+    rating: practice.rating,
+  }));
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <header className="mx-auto flex w-full max-w-md items-center px-6 py-5">
+      <header className="mx-auto flex w-full max-w-md items-center px-6 py-5 md:max-w-2xl">
         <Link
           href="/"
           aria-label="Back to home"
@@ -27,7 +36,7 @@ export default async function CalendarPage() {
           </svg>
         </Link>
       </header>
-      <PracticeCalendar />
+      <PracticeCalendar practices={initialPractices} />
     </div>
   );
 }

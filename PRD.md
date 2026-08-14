@@ -226,6 +226,8 @@ The practice should include:
 
 Preparation notes are not saved.
 
+For registered users the practice is saved to their account in the database, so their history, streak, and calendar persist across devices and browsers.
+
 The completed practice contributes to the user’s streak and calendar.
 
 5.9 About Page
@@ -388,6 +390,8 @@ The application should work well on:
 * Desktop browsers
 
 The design should be mobile-first because daily speaking practice is likely to happen on a phone.
+
+On larger screens the content containers widen and the text scales up so the interface fills the available space instead of staying in a narrow mobile column.
 
 14. Visual Design
 

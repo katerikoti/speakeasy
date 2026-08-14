@@ -10,7 +10,7 @@ export default async function SettingsPage() {
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <header className="mx-auto flex w-full max-w-md items-center px-6 py-5">
+      <header className="mx-auto flex w-full max-w-md items-center px-6 py-5 md:max-w-2xl">
         <Link
           href="/"
           aria-label="Back to home"

@@ -119,7 +119,7 @@ export function SettingsForm({ initial }: { initial: PracticeSettings }) {
   return (
     <form
       action={formAction}
-      className="mx-auto flex w-full max-w-md flex-1 flex-col gap-6 px-6 pb-12"
+      className="mx-auto flex w-full max-w-md flex-1 flex-col gap-6 px-6 pb-12 md:max-w-2xl"
     >
       <fieldset>
         <legend className="text-sm font-medium text-ink-soft">

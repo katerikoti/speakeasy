@@ -35,3 +35,16 @@ export function createPractice({ userId, topicId, rating }: PracticeInput) {
     data: { userId, topicId, rating },
   });
 }
+
+export function upsertPractice({
+  id,
+  userId,
+  topicId,
+  rating,
+}: PracticeInput & { id: string }) {
+  return prisma.practice.upsert({
+    where: { id },
+    create: { id, userId, topicId, rating },
+    update: {},
+  });
+}

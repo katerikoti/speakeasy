@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import type { GuestPractice } from "@/lib/guestStorage";
 import { localDayKey, longestStreak } from "@/lib/streak";
 import { TOPICS, type Topic } from "@/lib/topics";
-import { useGuestData } from "@/lib/useGuestData";
 
 const WEEKDAY_LABELS = ["S", "M", "T", "W", "T", "F", "S"];
 
@@ -27,8 +27,7 @@ function formatDayKey(dayKey: string): string {
   });
 }
 
-export function PracticeCalendar() {
-  const guestData = useGuestData();
+export function PracticeCalendar({ practices }: { practices: GuestPractice[] }) {
   const [month, setMonth] = useState(() => {
     const now = new Date();
     return new Date(now.getFullYear(), now.getMonth(), 1);
@@ -36,7 +35,7 @@ export function PracticeCalendar() {
 
   const todayKey = localDayKey(new Date());
   const [selectedKey, setSelectedKey] = useState<string | null>(
-    guestData.practices.some(
+    practices.some(
       (practice) => localDayKey(new Date(practice.practicedAt)) === todayKey,
     )
       ? todayKey
@@ -44,7 +43,7 @@ export function PracticeCalendar() {
   );
 
   const practicesByDay = new Map<string, { topic: Topic; rating: number | null }[]>();
-  for (const practice of guestData.practices) {
+  for (const practice of practices) {
     const key = localDayKey(new Date(practice.practicedAt));
     const topic = TOPIC_BY_ID.get(practice.topicId);
     if (!topic) {
@@ -67,7 +66,7 @@ export function PracticeCalendar() {
   const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
 
   const longest = longestStreak(
-    guestData.practices.map((practice) => practice.practicedAt),
+    practices.map((practice) => practice.practicedAt),
   );
 
   function goToPreviousMonth() {
@@ -85,7 +84,7 @@ export function PracticeCalendar() {
   const selectedTopics = selectedKey ? practicesByDay.get(selectedKey) : null;
 
   return (
-    <div className="mx-auto flex w-full max-w-md flex-1 flex-col gap-6 px-6 pb-12 pt-4">
+    <div className="mx-auto flex w-full max-w-md flex-1 flex-col gap-6 px-6 pb-12 pt-4 md:max-w-2xl">
       <div className="flex items-center justify-between">
         <button
           type="button"

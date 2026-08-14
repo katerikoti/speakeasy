@@ -28,8 +28,8 @@ const STEPS = [
 
 export default function AboutPage() {
   return (
-    <div className="mx-auto flex w-full max-w-md flex-1 flex-col px-6 py-12">
-      <p className="font-display text-3xl font-medium text-ink">Speakeasy</p>
+    <div className="mx-auto flex w-full max-w-md flex-1 flex-col px-6 py-12 md:max-w-2xl">
+      <p className="font-display text-3xl font-medium text-ink md:text-4xl">Speakeasy</p>
       <p className="mt-2 text-sm text-ink-soft">
         Daily speaking practice, one spin at a time.
       </p>
