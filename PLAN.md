@@ -68,7 +68,7 @@ Phase 4 — Guest Experience
 * Display guest calendar — removed (calendar is now a registered-user feature; /calendar is protected with requireUserId)
 * Handle local storage versioning if needed — done (version: 1)
 * Encourage registration after first completed practice — done (modal shown only to guests, only when local history contains exactly the just-completed practice; dismissible)
-* Provide public about page — done (/about, shareable link with explanation, practice-flow summary, open-app button, device-specific home-screen install guide, no auth required)
+* Provide public about page — done (/about, landing-style page with sticky nav, hero + wheel, about/how-it-works/how-to-install sections, footer, open-app button, install guide, no auth required)
 
 Phase 5 — Database
 

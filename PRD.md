@@ -234,13 +234,15 @@ The completed practice contributes to the user’s streak and calendar.
 
 The application includes a public about page (at /about) that can be shared as a link to introduce new or prospective users.
 
-The about page:
+The about page is a landing-style page and includes:
 
-* Explains what the application is in a short paragraph
-* Summarizes the practice flow (Spin, Prepare, Speak, Reflect)
-* Provides a button to open the application
-* Provides device-appropriate instructions for adding the application to the home screen
-* Notes that no account is required to start and that guest progress can be kept with a later registration
+* A sticky navigation with anchor links to the page sections (about, how it works, how to install)
+* A hero section with the Speakeasy wordmark, slogan, an illustration of the topic wheel, and a button to open the application
+* An about section explaining what the application is in a short paragraph
+* A how-it-works section summarizing the practice flow (Spin, Prepare, Speak, Reflect)
+* A how-to-install section with device-appropriate instructions for adding the application to the home screen
+* A footer
+* A note that no account is required to start and that guest progress can be kept with a later registration
 
 The about page is public and does not require authentication.
 
