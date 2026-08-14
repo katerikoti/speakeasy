@@ -210,7 +210,7 @@ export function PracticeCalendar() {
                           aria-hidden="true"
                           className={`h-4 w-4 ${
                             index < rating
-                              ? "fill-ink text-ink"
+                              ? "fill-almond-silk text-almond-silk"
                               : "fill-none stroke-almond-silk"
                           }`}
                         >
